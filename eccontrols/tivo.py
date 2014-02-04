@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from common import Switch
+from eccontrols import *
 
 import socket
 import time
