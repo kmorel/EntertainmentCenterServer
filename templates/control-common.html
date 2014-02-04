@@ -4,12 +4,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Untitled Document</title>
 <style type="text/css"></style>
-<link href="static/css/controls-base.css" rel="stylesheet" type="text/css" />
+<link href="/static/css/controls-base.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
 <div class="PowerArea">
-  <div class="PowerButton"><img src="static/icons/power-on.png" width="128" height="128" alt="Refresh On" /></div>  <label for="state"></label>
+  <div class="PowerButton"><img src="/static/icons/power-on.png" width="128" height="128" alt="Refresh On" /></div>  <label for="state"></label>
   <div class="PowerSelect">
     <select name="state" id="state">
       <option>TiVo</option>
@@ -18,13 +18,13 @@
     </select>
   </div>
 </div>
-<div class="MainArea">Volume: <span id="volumePrint">100</span></div>
+<div class="MainArea">Content</div>
 <div class="VolumeArea">
-  <div class="VolumeButton"><img src="static/icons/volume-on.png" /></div>
+  <div class="VolumeButton"><img src="/static/icons/volume-on.png" name="mute" id="mute" onclick="setMute('on')" /></div>
   <div class="VolumeSelect">
-    <input name="volume" type="range" class="VolumeSlider" min="0" max="185" oninput="changeVolume(this.value)" />
+    <input name="volume" type="range" class="VolumeSlider" min="0" max="185" oninput="setVolume(this.value)" />
   </div>
 </div>
-<script type="text/javascript" src="static/js/controls.js"></script>
+<script type="text/javascript" src="/static/js/controls.js"></script>
 </body>
 </html>
