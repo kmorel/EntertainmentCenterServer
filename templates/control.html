@@ -11,14 +11,32 @@
 <div class="PowerArea">
   <div class="PowerButton"><img src="/static/icons/power-on.png" width="128" height="128" alt="Refresh On" /></div>  <label for="state"></label>
   <div class="PowerSelect">
-    <select name="state" id="state" onchange="setUpMode(this.selectedIndex)">
+    <select name="state" id="state" onchange="sendMode()">
       {% for mode in mode_list %}
       <option>{{ mode }}</option>
       {% endfor %}
     </select>
   </div>
 </div>
-<div class="MainArea">Content</div>
+<div class="MainArea">
+  <div class="ControlArea" id="TiVo">
+    <h1>No Controls for TiVo</h1>
+  </div>
+  <div class="ControlArea" id="Blu-Ray">
+    <h1>No Controls for Blu-Ray</h1>
+  </div>
+  <div class="ControlArea" id="XBox360">
+    <h1>No Controls XBox 360</h1>
+  </div>
+  <div class="ControlArea" id="Wii">
+    <h1>No Controls for Wii</h1></div>
+  <div class="ControlArea" id="Playstation2">
+    <h1>No Controls for Playstation 2</h1>
+  </div>
+  <div class="ControlArea" id="TurnEverythingOff">
+    <h1>No Controls for Turn Everything Off</h1>
+  </div>
+</div>
 <div class="VolumeArea">
   <div class="VolumeButton"><img src="/static/icons/volume-on.png" id="mute" onclick="toggleMute()" /></div>
   <div class="VolumeSelect">
@@ -27,6 +45,7 @@
 </div>
 <script type="text/javascript" src="/static/js/controls.js"></script>
 <script type="text/javascript">
+setUpMode(2);
 volumeTag = document.getElementById("volume");
 volumeTag.value = {{volume}};
 setMuteFlag({{mute}});

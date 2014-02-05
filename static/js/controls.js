@@ -11,11 +11,11 @@ function setVolume(newValue) {
 muteFlag = false;
 
 function setMuteFlag(flag) {
-	imgTag = document.getElementById("mute");
+	var imgElement = document.getElementById("mute");
 	if (flag) {
-		imgTag.src = "/static/icons/volume-mute.png";
+		imgElement.src = "/static/icons/volume-mute.png";
 	} else {
-		imgTag.src = "/static/icons/volume-on.png";
+		imgElement.src = "/static/icons/volume-on.png";
 	}
 	muteFlag = flag;
 }
@@ -30,10 +30,32 @@ function toggleMute() {
 }
 
 function getModeString(index) {
-	selectTag = document.getElementById("state");
-	return selectTag.options[index].text;
+	var selectElement = document.getElementById("state");
+	return selectElement.options[index].text;
+}
+
+function setUpSelectedMode() {
+	var index = document.getElementById("state").selectedIndex;
+	var modeName = getModeString(index);
+	var modeId = modeName.replace(/\s/g, "");
+	var controlAreaElements = document.getElementsByClassName("ControlArea");
+	for (var eIndex in controlAreaElements) {
+		var element = controlAreaElements[eIndex];
+		if (element.id == modeId) {
+			element.style.display = "";
+		} else {
+			element.style.display = "none";
+		}
+	}
 }
 
 function setUpMode(index) {
-	pushToPage("/log/" + getModeString(index));
+	document.getElementById("state").selectedIndex = index;
+	setUpSelectedMode()
+}
+
+function sendMode() {
+	var index = document.getElementById("state").selectedIndex;
+	pushToPage("/set-mode/" + getModeString(index));
+	setUpSelectedMode();
 }

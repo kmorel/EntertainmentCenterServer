@@ -7,7 +7,7 @@ def render_page():
     return flask.render_template('control.html', \
                                  mute=int(False), \
                                  volume=101, \
-                                 mode_list=['TiVo', 'Blue-Ray', 'XBox 360', 'Wii', 'Playstation 2', 'Turn Everything Off']);
+                                 mode_list=['TiVo', 'Blu-Ray', 'XBox 360', 'Wii', 'Playstation 2', 'Turn Everything Off']);
 
 @web.route('/set-volume/<volume>')
 def set_volume(volume):
@@ -18,6 +18,11 @@ def set_volume(volume):
 def set_mute(flag):
     print 'Set mute: %s' % flag
     return str(flag)
+
+@web.route('/set-mode/<mode>')
+def set_mode(mode):
+    print 'Set mode: %s' % mode
+    return str(mode)
 
 @web.route('/log/<entry>')
 def log(entry):
