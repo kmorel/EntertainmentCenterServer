@@ -8,14 +8,32 @@ function setVolume(newValue) {
 	pushToPage("/set-volume/" + newValue);
 }
 
-function setMute(newValue) {
-	imgTag = find("mute");
-	if (newValue == "on") {
+muteFlag = false;
+
+function setMuteFlag(flag) {
+	imgTag = document.getElementById("mute");
+	if (flag) {
 		imgTag.src = "/static/icons/volume-mute.png";
-		imgTag.onclick = "setMute('off')";
 	} else {
 		imgTag.src = "/static/icons/volume-on.png";
-		imgTag.onclick = "setMute('on')";
 	}
-	pushToPage("/set-mute/" + newValue);
+	muteFlag = flag;
+}
+
+function sendMuteFlag(flag) {
+	setMuteFlag(flag)
+	pushToPage("/set-mute/" + (flag ? 1 : 0));
+}
+
+function toggleMute() {
+	sendMuteFlag(!muteFlag)
+}
+
+function getModeString(index) {
+	selectTag = document.getElementById("state");
+	return selectTag.options[index].text;
+}
+
+function setUpMode(index) {
+	pushToPage("/log/" + getModeString(index));
 }

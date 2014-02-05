@@ -11,20 +11,25 @@
 <div class="PowerArea">
   <div class="PowerButton"><img src="/static/icons/power-on.png" width="128" height="128" alt="Refresh On" /></div>  <label for="state"></label>
   <div class="PowerSelect">
-    <select name="state" id="state">
-      <option>TiVo</option>
-      <option>Blu-Ray</option>
-      <option>Turn Everything Off</option>
+    <select name="state" id="state" onchange="setUpMode(this.selectedIndex)">
+      {% for mode in mode_list %}
+      <option>{{ mode }}</option>
+      {% endfor %}
     </select>
   </div>
 </div>
 <div class="MainArea">Content</div>
 <div class="VolumeArea">
-  <div class="VolumeButton"><img src="/static/icons/volume-on.png" name="mute" id="mute" onclick="setMute('on')" /></div>
+  <div class="VolumeButton"><img src="/static/icons/volume-on.png" id="mute" onclick="toggleMute()" /></div>
   <div class="VolumeSelect">
-    <input name="volume" type="range" class="VolumeSlider" min="0" max="185" oninput="setVolume(this.value)" />
+    <input id="volume" type="range" class="VolumeSlider" min="0" max="185" oninput="setVolume(this.value)" />
   </div>
 </div>
 <script type="text/javascript" src="/static/js/controls.js"></script>
+<script type="text/javascript">
+volumeTag = document.getElementById("volume");
+volumeTag.value = {{volume}};
+setMuteFlag({{mute}});
+</script>
 </body>
 </html>
