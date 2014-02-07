@@ -27,6 +27,21 @@
 	right: 0px;
 	height: .5in;
 }
+.Button {
+	text-align: center;
+	height: 0.5in;
+	width: 0.5in;
+	vertical-align: middle;
+	position: relative;
+	float: left;
+}
+.TextButton {
+	text-align: center;
+	vertical-align: middle;
+	background-color: #CCC;
+	height: 100%;
+	width: 100%;
+}
 .VolumeButton img {
 	width: 100%;
 }
@@ -64,8 +79,19 @@
 	height: 100%;
 	width: 100%;
 	text-align: center;
+	clear: both;
+}
+.NavigationArea {
+	text-align: center;
 }
 .ControlArea h1 {
 	font-size: x-large;
 	font-weight: bolder;
+}
+.Button img {
+	height: .5in;
+	width: .5in;
+}
+.ButtonRow {
+	clear: both;
 }

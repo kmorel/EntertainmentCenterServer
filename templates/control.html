@@ -21,6 +21,31 @@
 <div class="MainArea">
   <div class="ControlArea" id="TiVo">
     <h1>No Controls for TiVo</h1>
+    <div class="NavigationArea">
+      <div class="ButtonRow">
+        <div class="Button">
+          <div class="TextButton">Now Playing</div>
+        </div>
+        <div class="Button" style="padding-left:0.25in; padding-top:0.25in;"><img src="/static/icons/navigate-up.png" width="128" height="128" alt="Up" /></div>
+        <div class="Button" style="padding-left:0.25in;">
+          <div class="TextButton">Live TV</div>
+        </div>
+      </div>
+      <div class="ButtonRow">
+        <div class="Button" style="padding-left:0.25in"><img src="/static/icons/navigate-left.png" width="128" height="128" alt="Left" />
+        </div>
+	    <div class="Button"><img src="/static/icons/navigate-select.png" width="128" height="128" alt="Select" /></div>
+        <div class="Button"><img src="/static/icons/navigate-right.png" width="128" height="128" alt="Right" /></div>
+      </div>
+      <div class="ButtonRow">
+        <div class="Button" style="padding-top:0.25in;">
+          <div class="TextButton">TiVo</div>
+        </div>
+        <div class="Button" style="padding-left:0.25in"><img src="/static/icons/navigate-down.png" width="128" height="128" alt="Down" /></div>
+        <div class="Button" style="padding-top:0.25in; padding-left:0.25in"><img src="/static/icons/navigate-return.png" width="128" height="128" alt="Return" /></div>
+      </div>
+      <div class="ButtonRow"></div>
+    </div>
   </div>
   <div class="ControlArea" id="Blu-Ray">
     <h1>No Controls for Blu-Ray</h1>
@@ -48,7 +73,7 @@
 </div>
 <script type="text/javascript" src="/static/js/controls.js"></script>
 <script type="text/javascript">
-setUpModeByIndex(5);
+setUpModeByIndex(0);
 volumeTag = document.getElementById("volume");
 volumeTag.value = {{volume}};
 setMuteFlag({{mute}});
