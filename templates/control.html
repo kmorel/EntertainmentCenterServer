@@ -34,7 +34,10 @@
     <h1>No Controls for Playstation 2</h1>
   </div>
   <div class="ControlArea" id="TurnEverythingOff">
-    <h1>No Controls for Turn Everything Off</h1>
+    <h1>Select Mode</h1>
+      {% for mode in mode_list %}
+        <div class="ButtonMode" onclick="setUpModeByIndex({{loop.index0}})">{{mode}}</div>
+      {% endfor %}
   </div>
 </div>
 <div class="VolumeArea">
@@ -45,7 +48,7 @@
 </div>
 <script type="text/javascript" src="/static/js/controls.js"></script>
 <script type="text/javascript">
-setUpMode(2);
+setUpModeByIndex(5);
 volumeTag = document.getElementById("volume");
 volumeTag.value = {{volume}};
 setMuteFlag({{mute}});

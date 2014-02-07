@@ -53,3 +53,19 @@
 	padding-top: 0.5in;
 	padding-bottom: 0.5in;
 }
+.ButtonMode {
+	font-size: x-large;
+	text-align: center;
+	background-color: #CCC;
+	padding: .15in;
+	margin: .05in;
+}
+.ControlArea {
+	height: 100%;
+	width: 100%;
+	text-align: center;
+}
+.ControlArea h1 {
+	font-size: x-large;
+	font-weight: bolder;
+}

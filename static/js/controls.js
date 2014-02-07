@@ -39,7 +39,7 @@ function setUpSelectedMode() {
 	var modeName = getModeString(index);
 	var modeId = modeName.replace(/\s/g, "");
 	var controlAreaElements = document.getElementsByClassName("ControlArea");
-	for (var eIndex in controlAreaElements) {
+	for (var eIndex = 0; eIndex < controlAreaElements.length; eIndex++) {
 		var element = controlAreaElements[eIndex];
 		if (element.id == modeId) {
 			element.style.display = "";
@@ -49,7 +49,7 @@ function setUpSelectedMode() {
 	}
 }
 
-function setUpMode(index) {
+function setUpModeByIndex(index) {
 	document.getElementById("state").selectedIndex = index;
 	setUpSelectedMode()
 }
