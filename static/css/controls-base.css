@@ -105,6 +105,21 @@
 	/* [disabled]width: 0.5in; */
 	background-color: #FFF;
 }
+.ControlTabs {
+	width: 100%;
+	left: 0px;
+	text-align: left;
+	white-space: nowrap;
+}
+.ControlTabs ul {
+	margin: 0px;
+	padding: 0px;
+}
+.ControlTabs li {
+	list-style-type: none;
+	float: left;
+	margin-right: 0.15in;
+}
 .NavigationArea {
 	width: 2in;
 	height: 2in;

@@ -1,6 +1,9 @@
 @charset "UTF-8";
 /* CSS Document */
 
+.ControlTabs {
+	display: none;
+}
 .NavigationAreaPlacement {
 	float: left;
 	width: 50%;

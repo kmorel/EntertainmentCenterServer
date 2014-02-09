@@ -1,5 +1,51 @@
 // JavaScript Document
 
+function switchToNavigation() {
+	var navigationAreaElements = document.getElementsByClassName("NavigationArea");
+	for (var eIndex = 0; eIndex < navigationAreaElements.length; eIndex++) {
+		var element = navigationAreaElements[eIndex];
+		element.style.display = "inline";
+	}
+	var playbackAreaElements = document.getElementsByClassName("PlaybackArea");
+	for (var eIndex = 0; eIndex < playbackAreaElements.length; eIndex++) {
+		var element = playbackAreaElements[eIndex];
+		element.style.display = "none";
+	}
+	var navigationTabElements = document.getElementsByClassName("NavigationTab");
+	for (var eIndex = 0; eIndex < navigationTabElements.length; eIndex++) {
+		var element = navigationTabElements[eIndex];
+		element.style.color="#000";
+	}
+	var playbackTabElements = document.getElementsByClassName("PlaybackTab");
+	for (var eIndex = 0; eIndex < playbackTabElements.length; eIndex++) {
+		var element = playbackTabElements[eIndex];
+		element.style.color="#999";
+	}
+}
+
+function switchToPlayback() {
+	var navigationAreaElements = document.getElementsByClassName("NavigationArea");
+	for (var eIndex = 0; eIndex < navigationAreaElements.length; eIndex++) {
+		var element = navigationAreaElements[eIndex];
+		element.style.display = "none";
+	}
+	var playbackAreaElements = document.getElementsByClassName("PlaybackArea");
+	for (var eIndex = 0; eIndex < playbackAreaElements.length; eIndex++) {
+		var element = playbackAreaElements[eIndex];
+		element.style.display = "";
+	}
+	var navigationTabElements = document.getElementsByClassName("NavigationTab");
+	for (var eIndex = 0; eIndex < navigationTabElements.length; eIndex++) {
+		var element = navigationTabElements[eIndex];
+		element.style.color="#999";
+	}
+	var playbackTabElements = document.getElementsByClassName("PlaybackTab");
+	for (var eIndex = 0; eIndex < playbackTabElements.length; eIndex++) {
+		var element = playbackTabElements[eIndex];
+		element.style.color="#000";
+	}
+}
+
 function pushToPage(url) {
 	new Image().src = url;
 }

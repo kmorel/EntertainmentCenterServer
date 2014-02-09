@@ -1,0 +1,18 @@
+@charset "UTF-8";
+.NavigationArea {
+	display: none;
+}
+.NavigationTab {
+	color: #999;
+}
+.ControlTabs {
+	display: inline;
+}
+.NavigationAreaPlacement {
+	float: none;
+	width: 100%;
+}
+.PlaybackAreaPlacement {
+	float: none;
+	width: 100%;
+}

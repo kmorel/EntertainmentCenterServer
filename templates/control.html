@@ -7,6 +7,7 @@
 </style>
 <link href="/static/css/controls-base.css" rel="stylesheet" type="text/css" />
 <link href="/static/css/controls-large-display.css" rel="stylesheet" type="text/css" />
+<link href="/static/css/controls-small-display.css" rel="stylesheet" type="text/css" media="max-device-width: 4in" />
 </head>
 
 <body>
@@ -23,12 +24,19 @@
 <div class="MainArea">
   <div class="ControlArea" id="TiVo">
     <h1>TiVo</h1>
+    <div class="ControlTabs">
+      <ul>
+        <li class="NavigationTab" onclick="switchToNavigation()">Navigation</li>
+        <li class="PlaybackTab" onclick="switchToPlayback()">Playback</li>
+      </ul>
+    </div>
+    <div style="clear:both;" />
     <div class="NavigationAreaPlacement">
-    <div class="NavigationArea">
+      <div class="NavigationArea">
       <div class="Button" style="left:0in; top:0in;">
         <div class="TextButton">Now Playing</div>
       </div>
-      <div class="Button" style="right:0in; top:0in;">
+      <div class="Button" style="left:1.5in; top:0in;">
         <div class="TextButton">Live TV</div>
       </div>
       <div class="Button" style="left:0.75in; top:0.25in;">
@@ -53,14 +61,14 @@
         <img src="/static/icons/navigate-return.png" width="128" height="128" alt="Return" />
       </div>
     </div>
-    </div>
+  </div>
     <div class="PlaybackAreaPlacement">
     <div class="PlaybackArea">
       <div class="Button" style="left:0.3in;">
         <img src="/static/icons/playback-play.png" width="128" height="128" alt="Play" />
       </div>
       <div class="Button" style="left:0.8in; width:0.7in; height:0.7in">
-        <img src="../static/icons/playback-pause.png" width="" height="128" alt="Pause" style="width:0.7in; height:0.7in;" />
+        <img src="/static/icons/playback-pause.png" width="" height="128" alt="Pause" style="width:0.7in; height:0.7in;" />
       </div>
       <div class="Button" style="left:0in; top:0.5in;">
         <img src="/static/icons/playback-seek-back.png" width="128" height="128" alt="Seek Backward" />
