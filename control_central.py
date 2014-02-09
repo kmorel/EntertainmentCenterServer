@@ -58,6 +58,18 @@ class ControlCentral:
             self._receiver.input(mode)
             #TODO set up other devices
 
+    def sendTiVo(self, ircode):
+        self._tivo.ircode(ircode)
+
+    def sendTiVoSecondsBack(self, t):
+        self._tivo.secondsBack(t)
+
+    def sendTiVoSecondsForward(self, t):
+        self._tivo.secondsForward(t)
+
+    def gotoTiVoScreen(self, screen):
+        self._tivo.teleport(screen)
+
 if __name__ == '__main__':
     control = ControlCentral()
     print control.devices.index(control.getCurrentState())

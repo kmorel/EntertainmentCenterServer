@@ -30,86 +30,76 @@ class TiVo:
     def teleport(self, screen):
         """Change the TiVo to the given screen. Valid screens are in the
 screen field."""
-        self._sendCommand('TELEPORT ' + screen)
+        if screen in self.screens:
+            self._sendCommand('TELEPORT ' + screen)
+        else:
+            print 'No such screen: %s' % screen
 
-    codes = [
-        'UP',
-        'DOWN',
-        'LEFT',
-        'RIGHT',
-        'SELECT',
-        'TIVO',
-        'LIVETV',
-        'GUIDE',
-        'INFO',
-        'EXIT',
-        'THUMBSUP',
-        'THUMBSDOWN',
-        'CHANNELUP',
-        'CHANNELDOWN',
-        'PLAY',
-        'FORWARD',
-        'REVERSE',
-        'PAUSE',
-        'SLOW',
-        'REPLAY',
-        'ADVANCE',
-        'RECORD'
-    ]
+    codes = {
+        'up': 'UP',
+        'down': 'DOWN',
+        'left': 'LEFT',
+        'right': 'RIGHT',
+        'select': 'SELECT',
+        'tivo': 'TIVO',
+        'live-tv': 'LIVETV',
+        'guide': 'GUIDE',
+        'info': 'INFO',
+        'return': 'EXIT',
+        'thumbs-up': 'THUMBSUP',
+        'thumbs-down': 'THUMBSDOWN',
+        'channel-up': 'CHANNELUP',
+        'channel-down': 'CHANNELDOWN',
+        'play': 'PLAY',
+        'seek-forward': 'FORWARD',
+        'seek-back': 'REVERSE',
+        'pause': 'PAUSE',
+        'slow': 'SLOW',
+        'back-8-sec': 'REPLAY',
+        'skip': 'ADVANCE',
+        'record': 'RECORD'
+    }
 
     def ircode(self, code):
-        """Send a code equivalent to a button on the IR remote. Some of the
-codes are listed in the codes field."""
-        self._sendCommand('IRCODE ' + code)
-
-    def play(self):
-        self.ircode('PLAY')
-
-    def pause(self):
-        self.ircode('PAUSE')
+        """Send a code equivalent to a button on the IR remote. The codes are
+defined in the codes field."""
+        if code.lower() in self.codes:
+            self._sendCommand('IRCODE ' + self.codes[code.lower()])
+        else:
+            print 'No such code: %s' % code
 
     def fastReverse(self):
-        self.play()
-        time.sleep(0.15)
-        self.ircode('REVERSE')
-        time.sleep(0.15)
-        self.ircode('REVERSE')
-        time.sleep(0.15)
-        self.ircode('REVERSE')
+        self.ircode('play')
+        time.sleep(0.2)
+        self.ircode('seek-back')
+        time.sleep(0.2)
+        self.ircode('seek-back')
+        time.sleep(0.2)
+        self.ircode('seek-back')
 
     def fastForward(self):
-        self.play()
-        time.sleep(0.15)
-        self.ircode('FORWARD')
-        time.sleep(0.15)
-        self.ircode('FORWARD')
-        time.sleep(0.15)
-        self.ircode('FORWARD')
+        self.ircode('play')
+        time.sleep(0.2)
+        self.ircode('seek-forward')
+        time.sleep(0.2)
+        self.ircode('seek-forward')
+        time.sleep(0.2)
+        self.ircode('seek-forward')
 
-    def back8sec(self):
-        self.ircode('REPLAY')
+    def secondsBack(self, t):
+        if int(t) < 9:
+            self.ircode('back-8-sec')
+        else:
+            self.fastReverse()
+            time.sleep(float(t)/32)
+            self.ircode('seek-back')
+            time.sleep(0.05)
+            self.ircode('play')
 
-    def back30sec(self):
-        self.fastReverse()
-        time.sleep(3.75)
-        self.play()
-
-    def back1min(self):
-        self.fastReverse()
-        time.sleep(7.5)
-        self.play()
-
-    def forward8sec(self):
+    def secondsForward(self, t):
         self.fastForward()
-        time.sleep(1)
-        self.play()
+        time.sleep(float(t)/32)
+        self.ircode('seek-forward')
+        time.sleep(0.05)
+        self.ircode('play')
 
-    def forward30sec(self):
-        self.fastForward()
-        time.sleep(3.75)
-        self.play()
-
-    def forward1min(self):
-        self.fastForward()
-        time.sleep(7.5)
-        self.play()

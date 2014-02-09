@@ -110,3 +110,19 @@ function sendModeByIndex(index) {
 	document.getElementById("state").selectedIndex = index;
 	sendMode()
 }
+
+function sendTiVo(ircode) {
+	pushToPage("/tivo/ircommand/" + ircode);
+}
+
+function sendTiVoBack(t) {
+	pushToPage("/tivo/skip-back/" + t);
+}
+
+function sendTiVoForward(t) {
+	pushToPage("/tivo/skip-forward/" + t);
+}
+
+function sendTiVoGoTo(screen) {
+	pushToPage("/tivo/goto/" + screen);
+}
