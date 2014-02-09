@@ -32,8 +32,8 @@
 	height: 0.5in;
 	width: 0.5in;
 	vertical-align: middle;
-	position: relative;
-	float: left;
+	display:inline;
+	position: absolute;
 }
 .TextButton {
 	text-align: center;
@@ -81,9 +81,6 @@
 	text-align: center;
 	clear: both;
 }
-.NavigationArea {
-	text-align: center;
-}
 .ControlArea h1 {
 	font-size: x-large;
 	font-weight: bolder;
@@ -92,6 +89,31 @@
 	height: .5in;
 	width: .5in;
 }
-.ButtonRow {
-	clear: both;
+.SkipBackLabel {
+	font-size: x-small;
+	text-align: left;
+	position: absolute;
+	display: inline;
+	/* [disabled]width: 0.5in; */
+	background-color: #FFF;
+}
+.SkipForwardLabel {
+	font-size: x-small;
+	text-align: right;
+	position: absolute;
+	display: inline;
+	/* [disabled]width: 0.5in; */
+	background-color: #FFF;
+}
+.NavigationArea {
+	width: 2in;
+	height: 2in;
+	position: relative;
+	margin: auto;
+}
+.PlaybackArea {
+	width: 2in;
+	height: 2in;
+	position: relative;
+	margin: auto;
 }

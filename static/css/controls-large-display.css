@@ -1,0 +1,11 @@
+@charset "UTF-8";
+/* CSS Document */
+
+.NavigationAreaPlacement {
+	float: left;
+	width: 50%;
+}
+.PlaybackAreaPlacement {
+	float: right;
+	width: 50%;
+}

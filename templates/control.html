@@ -3,8 +3,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Untitled Document</title>
-<style type="text/css"></style>
+<style type="text/css">
+</style>
 <link href="/static/css/controls-base.css" rel="stylesheet" type="text/css" />
+<link href="/static/css/controls-large-display.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -20,34 +22,80 @@
 </div>
 <div class="MainArea">
   <div class="ControlArea" id="TiVo">
-    <h1>No Controls for TiVo</h1>
+    <h1>TiVo</h1>
+    <div class="NavigationAreaPlacement">
     <div class="NavigationArea">
-      <div class="ButtonRow">
-        <div class="Button">
-          <div class="TextButton">Now Playing</div>
-        </div>
-        <div class="Button" style="padding-left:0.25in; padding-top:0.25in;"><img src="/static/icons/navigate-up.png" width="128" height="128" alt="Up" /></div>
-        <div class="Button" style="padding-left:0.25in;">
-          <div class="TextButton">Live TV</div>
-        </div>
+      <div class="Button" style="left:0in; top:0in;">
+        <div class="TextButton">Now Playing</div>
       </div>
-      <div class="ButtonRow">
-        <div class="Button" style="padding-left:0.25in"><img src="/static/icons/navigate-left.png" width="128" height="128" alt="Left" />
-        </div>
-	    <div class="Button"><img src="/static/icons/navigate-select.png" width="128" height="128" alt="Select" /></div>
-        <div class="Button"><img src="/static/icons/navigate-right.png" width="128" height="128" alt="Right" /></div>
+      <div class="Button" style="right:0in; top:0in;">
+        <div class="TextButton">Live TV</div>
       </div>
-      <div class="ButtonRow">
-        <div class="Button" style="padding-top:0.25in;">
-          <div class="TextButton">TiVo</div>
-        </div>
-        <div class="Button" style="padding-left:0.25in"><img src="/static/icons/navigate-down.png" width="128" height="128" alt="Down" /></div>
-        <div class="Button" style="padding-top:0.25in; padding-left:0.25in"><img src="/static/icons/navigate-return.png" width="128" height="128" alt="Return" /></div>
+      <div class="Button" style="left:0.75in; top:0.25in;">
+        <img src="/static/icons/navigate-up.png" width="128" height="128" alt="Up" />
       </div>
-      <div class="ButtonRow"></div>
+      <div class="Button" style="left:0.25in; top:0.75in;">
+        <img src="/static/icons/navigate-left.png" width="128" height="128" alt="Left" />
+      </div>
+      <div class="Button" style="left:0.75in; top:0.75in;">
+        <img src="/static/icons/navigate-select.png" width="128" height="128" alt="Select" />
+      </div>
+      <div class="Button" style="left:1.25in; top:0.75in;">
+        <img src="/static/icons/navigate-right.png" width="128" height="128" alt="Right" />
+      </div>
+      <div class="Button" style="left:0.75in; top:1.25in;">
+        <img src="/static/icons/navigate-down.png" width="128" height="128" alt="Down" />
+      </div>
+      <div class="Button" style="left:0in; top:1.5in;">
+        <div class="TextButton">TiVo</div>
+      </div>
+      <div class="Button" style="left:1.5in; top:1.5in;">
+        <img src="/static/icons/navigate-return.png" width="128" height="128" alt="Return" />
+      </div>
     </div>
+    </div>
+    <div class="PlaybackAreaPlacement">
+    <div class="PlaybackArea">
+      <div class="Button" style="left:0.3in;">
+        <img src="/static/icons/playback-play.png" width="128" height="128" alt="Play" />
+      </div>
+      <div class="Button" style="left:0.8in; width:0.7in; height:0.7in">
+        <img src="../static/icons/playback-pause.png" width="" height="128" alt="Pause" style="width:0.7in; height:0.7in;" />
+      </div>
+      <div class="Button" style="left:0in; top:0.5in;">
+        <img src="/static/icons/playback-seek-back.png" width="128" height="128" alt="Seek Backward" />
+      </div>
+      <div class="Button" style="left:1.5in; top:0.5in;">
+        <img src="/static/icons/playback-seek-forward.png" width="128" height="128" alt="Seek Forward" />
+      </div>
+      <div class="Button" style="left:0in; bottom:0.5in;">
+        <img src="/static/icons/playback-skip-back-time.png" width="128" height="128" alt="Back 30 Seconds" />
+      </div>
+      <div class="SkipBackLabel" style="left:0in; bottom:0.5in">30 sec</div>
+      <div class="Button" style="left:0.5in; bottom:0.5in;">
+        <img src="/static/icons/playback-skip-back-time.png" width="128" height="128" alt="Back 8 Seconds" />
+      </div>
+      <div class="SkipBackLabel" style="left:0.5in; bottom:0.5in">8 sec</div>
+      <div class="Button" style="right:0.5in; bottom:0.5in;">
+        <img src="/static/icons/playback-skip-forward-time.png" width="128" height="128" alt="Forward 8 Seconds" />
+      </div>
+      <div class="SkipForwardLabel" style="right:0.5in; bottom:0.5in">8 sec</div>
+      <div class="Button" style="right:0in; bottom:0.5in;">
+        <img src="/static/icons/playback-skip-forward-time.png" width="128" height="128" alt="Forward 30 Seconds" />
+      </div>
+      <div class="SkipForwardLabel" style="right:0in; bottom:0.5in">30 sec</div>
+      <div class="Button" style="left:0in; bottom:0in;">
+        <img src="/static/icons/playback-skip-back-time.png" width="128" height="128" alt="Back 1 Minute" />
+      </div>
+      <div class="SkipBackLabel" style="left:0in; bottom:0in">1 min</div>
+      <div class="Button" style="right:0in; bottom:0in;">
+        <img src="/static/icons/playback-skip-forward-time.png" width="128" height="128" alt="Forward 1 Minute" />
+      </div>
+      <div class="SkipForwardLabel" style="right:0in; bottom:0in">1 min</div>
   </div>
-  <div class="ControlArea" id="Blu-Ray">
+  </div>
+</div>
+<div class="ControlArea" id="Blu-Ray">
     <h1>No Controls for Blu-Ray</h1>
   </div>
   <div class="ControlArea" id="XBox360">
