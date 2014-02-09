@@ -12,7 +12,7 @@
 
 <body>
 <div class="PowerArea">
-  <div class="PowerButton"><img src="/static/icons/power-on.png" width="128" height="128" alt="Refresh On" /></div>  <label for="state"></label>
+  <div class="PowerButton"><img src="/static/icons/power-on.png" width="128" height="128" alt="Refresh On" onclick="sendMode()" /></div>  <label for="state"></label>
   <div class="PowerSelect">
     <select name="state" id="state" onchange="sendMode()">
       {% for mode in mode_list %}
@@ -30,8 +30,7 @@
         <li class="PlaybackTab" onclick="switchToPlayback()">Playback</li>
       </ul>
     </div>
-    <div style="clear:both;" />
-    <div class="NavigationAreaPlacement">
+    <div class="NavigationAreaPlacement" style="clear:both;">
       <div class="NavigationArea">
       <div class="Button" style="left:0in; top:0in;">
         <div class="TextButton">Now Playing</div>
@@ -117,7 +116,7 @@
   <div class="ControlArea" id="TurnEverythingOff">
     <h1>Select Mode</h1>
       {% for mode in mode_list %}
-        <div class="ButtonMode" onclick="setUpModeByIndex({{loop.index0}})">{{mode}}</div>
+        <div class="ButtonMode" onclick="sendModeByIndex({{loop.index0}})">{{mode}}</div>
       {% endfor %}
   </div>
 </div>
@@ -129,7 +128,7 @@
 </div>
 <script type="text/javascript" src="/static/js/controls.js"></script>
 <script type="text/javascript">
-setUpModeByIndex(0);
+setUpModeByIndex({{start_mode_index}});
 volumeTag = document.getElementById("volume");
 volumeTag.value = {{volume}};
 setMuteFlag({{mute}});

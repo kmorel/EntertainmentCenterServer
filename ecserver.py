@@ -2,31 +2,65 @@
 import flask
 web = flask.Flask(__name__)
 
+from control_central import *
+
+import sys
+
+control = ControlCentral()
+
 @web.route('/')
 def render_page():
     return flask.render_template('control.html', \
-                                 mute=int(False), \
-                                 volume=101, \
-                                 mode_list=['TiVo', 'Blu-Ray', 'XBox 360', 'Wii', 'Playstation 2', 'Turn Everything Off']);
+                                 mute=int(control.getMute()), \
+                                 volume=control.getVolume(), \
+                                 mode_list=control.devices, \
+                                 start_mode_index=control.devices.index(control.getCurrentState()));
 
-@web.route('/set-volume/<volume>')
-def set_volume(volume):
-    print 'Set volume: %s' % volume
-    return str(volume)
+@web.route('/set-volume/<int:level>')
+def set_volume(level):
+    try:
+        print 'Set volume: %s' % level
+        control.volume(level)
+    except Exception, e:
+        print e.message
+    except:
+        e = sys.exc_info()[0]
+        print e
+    return str(level)
 
 @web.route('/set-mute/<int:flag>')
 def set_mute(flag):
-    print 'Set mute: %s' % flag
+    try:
+        print 'Set mute: %s' % flag
+        control.mute(flag)
+    except Exception, e:
+        print e.message
+    except:
+        e = sys.exc_info()[0]
+        print e
     return str(flag)
 
 @web.route('/set-mode/<mode>')
 def set_mode(mode):
-    print 'Set mode: %s' % mode
+    try:
+        print 'Set mode: %s' % mode
+        control.changeMode(mode)
+    except Exception, e:
+        print e.message
+    except:
+        e = sys.exc_info()[0]
+        print e
     return str(mode)
 
 @web.route('/log/<entry>')
 def log(entry):
-    print entry
+    try:
+        print entry
+    except Exception, e:
+        print e.message
+    except:
+        e = sys.exc_info()[0]
+        print e
 
 if __name__ == '__main__':
     web.run(host='0.0.0.0', port=5000)

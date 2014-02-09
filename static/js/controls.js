@@ -105,3 +105,8 @@ function sendMode() {
 	pushToPage("/set-mode/" + getModeString(index));
 	setUpSelectedMode();
 }
+
+function sendModeByIndex(index) {
+	document.getElementById("state").selectedIndex = index;
+	sendMode()
+}

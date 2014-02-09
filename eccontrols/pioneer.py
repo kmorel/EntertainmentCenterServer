@@ -19,11 +19,11 @@ class Receiver:
 
     # Would be better off in configuration
     inputs = {
+        'Wii': 04,
         'TiVo': 06,
         'Playstation 2': 15,
         'XBox 360': 24,
-        'Blu-Ray': 25,
-        'Wii': 04
+        'Blu-Ray': 25
         }
 
     def _getStatus(self):
