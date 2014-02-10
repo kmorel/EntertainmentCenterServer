@@ -5,9 +5,35 @@
 .NavigationTab {
 	color: #999;
 }
+
 .ControlTabs {
 	display: inline;
 }
+
+.PowerButton {
+	width: 25%;
+}
+.PowerSelect {
+	padding-right: 30%;
+}
+
+.VolumeArea {
+	bottom: 12.5%;
+}
+.VolumeButton {
+	width: 25%;
+	position: absolute;
+	right: 0px;
+}
+.VolumeSelect {
+	padding-right: 30%;
+}
+
+.Button {
+	width: 25%;
+	height: 25%;
+}
+
 .NavigationAreaPlacement {
 	float: none;
 	width: 100%;

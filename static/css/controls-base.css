@@ -1,36 +1,41 @@
 @charset "UTF-8";
 /* CSS Document */
 
+.PowerArea {
+/*	position: absolute; */
+	width: 100%;
+	top: 0px;
+	left: 0px;
+}
+.PowerArea select {
+	width: 100%;
+}
+.PowerButton {
+	float: right;
+}
+.PowerButton img {
+	width: 100%;
+}
+.PowerSelect {
+	padding-top: 10px;
+}
 
 .VolumeArea {
 	position: absolute;
 	width: 100%;
-	bottom: 2px;
-}
-
-.PowerArea {
-	position: absolute;
-	width: 100%;
-	top: 0px;
-	height: .5in;
-	left: 12px;
 }
 .VolumeSlider {
-	height: 0.5in;
 	width: 100%;
-	/* [disabled]position: absolute; */
-	/* [disabled]left: 0px; */
 }
-.VolumeButton {
-	width: .5in;
-	position: absolute;
-	right: 0px;
-	height: .5in;
+.VolumeSelect {
+	padding-top: 15px;
 }
+.VolumeButton img {
+	width: 100%;
+}
+
 .Button {
 	text-align: center;
-	height: 0.5in;
-	width: 0.5in;
 	vertical-align: middle;
 	display:inline;
 	position: absolute;
@@ -42,31 +47,9 @@
 	height: 100%;
 	width: 100%;
 }
-.VolumeButton img {
-	width: 100%;
-}
-.PowerArea select {
-	width: 100%;
-}
-.PowerButton {
-	width: 0.5in;
-	height: 0.5in;
-	position: absolute;
-	right: 0px;
-}
-.PowerButton img {
-	height: 100%;
-	width: 100%;
-}
-.PowerSelect {
-	padding-right: 0.6in;
-}
-.VolumeSelect {
-	padding-right: .6in;
-}
+
 .MainArea {
-	padding-top: 0.5in;
-	padding-bottom: 0.5in;
+	clear: both;
 }
 .ButtonMode {
 	font-size: x-large;
@@ -75,6 +58,7 @@
 	padding: .15in;
 	margin: .05in;
 }
+
 .ControlArea {
 	height: 100%;
 	width: 100%;
@@ -85,16 +69,16 @@
 	font-size: x-large;
 	font-weight: bolder;
 }
+
 .Button img {
-	height: .5in;
-	width: .5in;
+	width: 100%;
 }
+
 .SkipBackLabel {
 	font-size: x-small;
 	text-align: left;
 	position: absolute;
 	display: inline;
-	/* [disabled]width: 0.5in; */
 	background-color: #FFF;
 }
 .SkipForwardLabel {
@@ -102,7 +86,6 @@
 	text-align: right;
 	position: absolute;
 	display: inline;
-	/* [disabled]width: 0.5in; */
 	background-color: #FFF;
 }
 .ControlTabs {
@@ -121,14 +104,14 @@
 	margin-right: 0.15in;
 }
 .NavigationArea {
-	width: 2in;
-	height: 2in;
 	position: relative;
+	width:100%;
+	padding-bottom:100%;
 	margin: auto;
 }
 .PlaybackArea {
-	width: 2in;
-	height: 2in;
 	position: relative;
+	width:100%;
+	padding-bottom:100%;
 	margin: auto;
 }

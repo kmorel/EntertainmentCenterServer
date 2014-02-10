@@ -7,12 +7,12 @@
 </style>
 <link href="/static/css/controls-base.css" rel="stylesheet" type="text/css" />
 <link href="/static/css/controls-large-display.css" rel="stylesheet" type="text/css" />
-<link href="/static/css/controls-small-display.css" rel="stylesheet" type="text/css" media="only screen and (max-device-width: 5in)" />
+<link href="/static/css/controls-small-display.css" rel="stylesheet" type="text/css" /><!--media="only screen and (max-device-width: 5in)" /> -->
 </head>
 
 <body>
 <div class="PowerArea">
-  <div class="PowerButton"><img src="/static/icons/power-on.png" width="128" height="128" alt="Refresh On" onclick="sendMode()" /></div>  <label for="state"></label>
+  <div class="PowerButton"><img src="/static/icons/power-on.png" alt="Refresh On" onclick="sendMode()" /></div>  <label for="state"></label>
   <div class="PowerSelect">
     <select name="state" id="state" onchange="sendMode()">
       {% for mode in mode_list %}
@@ -35,70 +35,70 @@
       <div class="Button" style="left:0in; top:0in;" onclick="sendTiVoGoTo('NowPlaying')" >
         <div class="TextButton">Now Playing</div>
       </div>
-      <div class="Button" style="left:1.5in; top:0in;" onclick="sendTiVoGoTo('LiveTV')" >
+      <div class="Button" style="left:75%; top:0%;" onclick="sendTiVoGoTo('LiveTV')" >
         <div class="TextButton">Live TV</div>
       </div>
-      <div class="Button" style="left:0.75in; top:0.25in;" onclick="sendTiVo('up')" >
-        <img src="/static/icons/navigate-up.png" width="128" height="128" alt="Up" />
+      <div class="Button" style="left:37.5%; top:12.5%;" onclick="sendTiVo('up')" >
+        <img src="/static/icons/navigate-up.png" alt="Up" />
       </div>
-      <div class="Button" style="left:0.25in; top:0.75in;" onclick="sendTiVo('left')">
-        <img src="/static/icons/navigate-left.png" width="128" height="128" alt="Left" />
+      <div class="Button" style="left:12.5%; top:37.5%;" onclick="sendTiVo('left')">
+        <img src="/static/icons/navigate-left.png" alt="Left" />
       </div>
-      <div class="Button" style="left:0.75in; top:0.75in;" onclick="sendTiVo('select')">
-        <img src="/static/icons/navigate-select.png" width="128" height="128" alt="Select" />
+      <div class="Button" style="left:37.5%; top:37.5%;" onclick="sendTiVo('select')">
+        <img src="/static/icons/navigate-select.png" alt="Select" />
       </div>
-      <div class="Button" style="left:1.25in; top:0.75in;" onclick="sendTiVo('right')">
-        <img src="/static/icons/navigate-right.png" width="128" height="128" alt="Right" />
+      <div class="Button" style="left:62.5%; top:37.5%;" onclick="sendTiVo('right')">
+        <img src="/static/icons/navigate-right.png" alt="Right" />
       </div>
-      <div class="Button" style="left:0.75in; top:1.25in;" onclick="sendTiVo('down')">
-        <img src="/static/icons/navigate-down.png" width="128" height="128" alt="Down" />
+      <div class="Button" style="left:37.5%; top:62.5%;" onclick="sendTiVo('down')">
+        <img src="/static/icons/navigate-down.png" alt="Down" />
       </div>
-      <div class="Button" style="left:0in; top:1.5in;" onclick="sendTiVo('tivo')">
+      <div class="Button" style="left:0%; top:75%;" onclick="sendTiVo('tivo')">
         <div class="TextButton">TiVo</div>
       </div>
-      <div class="Button" style="left:1.5in; top:1.5in;" onclick="sendTiVo('return')">
-        <img src="/static/icons/navigate-return.png" width="128" height="128" alt="Return" />
+      <div class="Button" style="left:75%; top:75%;" onclick="sendTiVo('return')">
+        <img src="/static/icons/navigate-return.png" alt="Return" />
       </div>
     </div>
   </div>
     <div class="PlaybackAreaPlacement">
     <div class="PlaybackArea">
-      <div class="Button" style="left:0.3in;" onclick="sendTiVo('play')">
-        <img src="/static/icons/playback-play.png" width="128" height="128" alt="Play" />
+      <div class="Button" style="left:15%;" onclick="sendTiVo('play')">
+        <img src="/static/icons/playback-play.png" alt="Play" />
       </div>
-      <div class="Button" style="left:0.8in; width:0.7in; height:0.7in" onclick="sendTiVo('pause')">
-        <img src="/static/icons/playback-pause.png" width="" height="128" alt="Pause" style="width:0.7in; height:0.7in;" />
+      <div class="Button" style="left:40%; width:35%; height:35%;" onclick="sendTiVo('pause')">
+        <img src="/static/icons/playback-pause.png" alt="Pause" />
       </div>
-      <div class="Button" style="left:0in; top:0.5in;" onclick="sendTiVo('seek-back')">
-        <img src="/static/icons/playback-seek-back.png" width="128" height="128" alt="Seek Backward" />
+      <div class="Button" style="left:0%; top:25%;" onclick="sendTiVo('seek-back')">
+        <img src="/static/icons/playback-seek-back.png" alt="Seek Backward" />
       </div>
-      <div class="Button" style="left:1.5in; top:0.5in;" onclick="sendTiVo('seek-forward')">
-        <img src="/static/icons/playback-seek-forward.png" width="128" height="128" alt="Seek Forward" />
+      <div class="Button" style="left:75%; top:25%;" onclick="sendTiVo('seek-forward')">
+        <img src="/static/icons/playback-seek-forward.png" alt="Seek Forward" />
       </div>
-      <div class="Button" style="left:0in; bottom:0.5in;" onclick="sendTiVoBack(30)">
-        <img src="/static/icons/playback-skip-back-time.png" width="128" height="128" alt="Back 30 Seconds" />
+      <div class="Button" style="left:0%; bottom:25%;" onclick="sendTiVoBack(30)">
+        <img src="/static/icons/playback-skip-back-time.png" alt="Back 30 Seconds" />
       </div>
-      <div class="SkipBackLabel" style="left:0in; bottom:0.5in">30 sec</div>
-      <div class="Button" style="left:0.5in; bottom:0.5in;" onclick="sendTiVoBack(8)">
-        <img src="/static/icons/playback-skip-back-time.png" width="128" height="128" alt="Back 8 Seconds" />
+      <div class="SkipBackLabel" style="left:0%; bottom:25%">30 sec</div>
+      <div class="Button" style="left:25%; bottom:25%;" onclick="sendTiVoBack(8)">
+        <img src="/static/icons/playback-skip-back-time.png" alt="Back 8 Seconds" />
       </div>
-      <div class="SkipBackLabel" style="left:0.5in; bottom:0.5in">8 sec</div>
-      <div class="Button" style="right:0.5in; bottom:0.5in;" onclick="sendTiVoForward(8)">
-        <img src="/static/icons/playback-skip-forward-time.png" width="128" height="128" alt="Forward 8 Seconds" />
+      <div class="SkipBackLabel" style="left:25%; bottom:25%">8 sec</div>
+      <div class="Button" style="right:25%; bottom:25%;" onclick="sendTiVoForward(8)">
+        <img src="/static/icons/playback-skip-forward-time.png" alt="Forward 8 Seconds" />
       </div>
-      <div class="SkipForwardLabel" style="right:0.5in; bottom:0.5in">8 sec</div>
-      <div class="Button" style="right:0in; bottom:0.5in;" onclick="sendTiVoForward(30)">
-        <img src="/static/icons/playback-skip-forward-time.png" width="128" height="128" alt="Forward 30 Seconds" />
+      <div class="SkipForwardLabel" style="right:25%; bottom:25%">8 sec</div>
+      <div class="Button" style="right:0%; bottom:25%;" onclick="sendTiVoForward(30)">
+        <img src="/static/icons/playback-skip-forward-time.png" alt="Forward 30 Seconds" />
       </div>
-      <div class="SkipForwardLabel" style="right:0in; bottom:0.5in">30 sec</div>
-      <div class="Button" style="left:0in; bottom:0in;" onclick="sendTiVoBack(60)">
-        <img src="/static/icons/playback-skip-back-time.png" width="128" height="128" alt="Back 1 Minute" />
+      <div class="SkipForwardLabel" style="right:0%; bottom:25%">30 sec</div>
+      <div class="Button" style="left:0%; bottom:0%;" onclick="sendTiVoBack(60)">
+        <img src="/static/icons/playback-skip-back-time.png" alt="Back 1 Minute" />
       </div>
-      <div class="SkipBackLabel" style="left:0in; bottom:0in">1 min</div>
-      <div class="Button" style="right:0in; bottom:0in;" onclick="sendTiVoForward(60)">
-        <img src="/static/icons/playback-skip-forward-time.png" width="128" height="128" alt="Forward 1 Minute" />
+      <div class="SkipBackLabel" style="left:0%; bottom:0%">1 min</div>
+      <div class="Button" style="right:0%; bottom:0%;" onclick="sendTiVoForward(60)">
+        <img src="/static/icons/playback-skip-forward-time.png" alt="Forward 1 Minute" />
       </div>
-      <div class="SkipForwardLabel" style="right:0in; bottom:0in">1 min</div>
+      <div class="SkipForwardLabel" style="right:0%; bottom:0%">1 min</div>
   </div>
   </div>
 </div>

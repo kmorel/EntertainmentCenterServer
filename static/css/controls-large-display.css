@@ -1,14 +1,38 @@
 @charset "UTF-8";
 /* CSS Document */
 
+.PowerButton {
+	width: 12.5%;
+}
+.PowerSelect {
+	padding-right: 15%;
+}
+
+.VolumeArea {
+	bottom: 6.25%;
+}
+.VolumeButton {
+	width: 12.5%;
+	position: absolute;
+	right: 0px;
+}
+.VolumeSelect {
+	padding-right: 15%;
+}
+
+.Button {
+	width: 25%;
+	height: 25%;
+}
+
 .ControlTabs {
 	display: none;
 }
 .NavigationAreaPlacement {
 	float: left;
-	width: 50%;
+	width: 47%;
 }
 .PlaybackAreaPlacement {
 	float: right;
-	width: 50%;
+	width: 47%;
 }
