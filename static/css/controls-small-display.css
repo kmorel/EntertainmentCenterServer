@@ -2,25 +2,23 @@
 
 .ControlTabs {
 	display: inline;
+	font-size: xx-large;
 }
 
 .PowerButton {
-	width: 25%;
+	width: 15%;
 }
 .PowerSelect {
-	padding-right: 30%;
+	padding-right: 20%;
 }
 
-.VolumeArea {
-	bottom: 12.5%;
-}
 .VolumeButton {
-	width: 25%;
+	width: 15%;
 	position: absolute;
 	right: 0px;
 }
 .VolumeSelect {
-	padding-right: 30%;
+	padding-right: 20%;
 }
 
 .Button {
@@ -30,11 +28,20 @@
 
 .NavigationAreaPlacement {
 	float: none;
-	width: 100%;
+	width: 80%;
+	padding-left: 10%;
 }
 .PlaybackAreaPlacement {
 	float: none;
-	width: 100%;
+	width: 80%;
+	padding-left: 10%;
+}
+
+.SkipBackLabel {
+	font-size: medium;
+}
+.SkipForwardLabel {
+	font-size: medium;
 }
 
 .HiddenPane {

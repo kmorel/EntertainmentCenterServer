@@ -18,14 +18,17 @@
 }
 .PowerSelect {
 	padding-top: 10px;
+	font-size: xx-large;
 }
 
 .VolumeArea {
 	position: absolute;
 	width: 100%;
+	bottom: 2%;
 }
 .VolumeSlider {
 	width: 100%;
+	font-size: xx-large;
 }
 .VolumeSelect {
 	padding-top: 15px;
