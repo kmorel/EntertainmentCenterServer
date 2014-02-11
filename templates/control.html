@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Untitled Document</title>
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<title>Remote Control</title>
 <style type="text/css">
 </style>
 <link href="/static/css/controls-base.css" rel="stylesheet" type="text/css" />
@@ -132,6 +133,15 @@ setUpModeByIndex({{start_mode_index}});
 volumeTag = document.getElementById("volume");
 volumeTag.value = {{volume}};
 setMuteFlag({{mute}});
+
+// Specail way to remove address bar.
+window.addEventListener("load",function() {
+	// Set a timeout...
+	setTimeout(function(){
+		// Hide the address bar!
+		window.scrollTo(0, 1);
+	}, 0);
+});
 </script>
 </body>
 </html>
