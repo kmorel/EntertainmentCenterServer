@@ -1,10 +1,4 @@
 @charset "UTF-8";
-.NavigationArea {
-	display: none;
-}
-.NavigationTab {
-	color: #999;
-}
 
 .ControlTabs {
 	display: inline;
@@ -41,4 +35,12 @@
 .PlaybackAreaPlacement {
 	float: none;
 	width: 100%;
+}
+
+.HiddenPane {
+	display: none;
+}
+
+.InactiveTab {
+	color: #999;
 }
