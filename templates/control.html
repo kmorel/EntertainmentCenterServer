@@ -20,9 +20,9 @@
 <div class="PowerArea">
   <div class="PowerButton"><img src="/static/icons/power-on.png" alt="Refresh On" onclick="sendMode()" /></div>  <label for="state"></label>
   <div class="PowerSelect">
-    <select name="state" id="state" onchange="sendMode()">
+    <select name="state" id="state" data-native-menu="false" onchange="sendMode()">
       {% for mode in mode_list %}
-      <option>{{ mode }}</option>
+      <option value="{{ mode }}">{{ mode }}</option>
       {% endfor %}
     </select>
   </div>
@@ -129,23 +129,34 @@
 <div class="VolumeArea">
   <div class="VolumeButton"><img src="/static/icons/volume-on.png" id="mute" onclick="toggleMute()" /></div>
   <div class="VolumeSelect">
-    <input id="volume" type="range" class="VolumeSlider" min="0" max="185" oninput="setVolume(this.value)" />
+    <form class="full-width-slider">
+      <input id="volume" type="range" class="VolumeSlider" min="0" max="185" data-highlight="true" />
+    </form>
   </div>
 </div>
 <script type="text/javascript" src="/static/js/controls.js"></script>
 <script type="text/javascript">
-setUpModeByIndex({{start_mode_index}});
-volumeTag = document.getElementById("volume");
-volumeTag.value = {{volume}};
-setMuteFlag({{mute}});
+$(document).ready(function() {
+	// Initialize mode
+	setUpModeByIndex({{start_mode_index}});
+	// Make text box next to slider read only.
+	$(".ui-slider-input").prop("readonly",true);
+	// Initialize volume, slider, and mute
+	$('#volume').val({{volume}});
+	$('#volume').slider('refresh');
+	$('#volume').on("change", function(event, ui) {
+		setVolume($('#volume').val());
+	});
+	setMuteFlag({{mute}});
 
-// Specail way to remove address bar.
-window.addEventListener("load",function() {
-	// Set a timeout...
-	setTimeout(function(){
-		// Hide the address bar!
-		window.scrollTo(0, 1);
-	}, 0);
+	// Specail way to remove address bar.
+	window.addEventListener("load",function() {
+		// Set a timeout...
+		setTimeout(function(){
+			// Hide the address bar!
+			window.scrollTo(0, 1);
+		}, 0);
+	});
 });
 </script>
 </body>
