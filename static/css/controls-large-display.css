@@ -4,15 +4,6 @@
 .PowerButton {
 	width: 12.5%;
 }
-.PowerSelect {
-	padding-right: 15%;
-}
-
-.VolumeButton {
-	width: 12.5%;
-	position: absolute;
-	right: 0px;
-}
 .VolumeSelect {
 	padding-right: 15%;
 }

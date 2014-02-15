@@ -10,21 +10,9 @@
 .PowerArea select {
 	width: 100%;
 }
-.PowerButton {
-	float: right;
-}
-.PowerButton img {
-	width: 100%;
-}
-.PowerSelect {
-	padding-top: 10px;
-	font-size: xx-large;
-}
 
-.VolumeArea {
-	position: absolute;
+#volumeArea {
 	width: 100%;
-	bottom: 2%;
 }
 .VolumeSlider {
 	width: 100%;
@@ -32,9 +20,6 @@
 }
 .VolumeSelect {
 	padding-top: 15px;
-}
-.VolumeButton img {
-	width: 100%;
 }
 
 .Button {
@@ -50,16 +35,15 @@
 	height: 100%;
 	width: 100%;
 }
-
-.MainArea {
-	clear: both;
-}
 .ButtonMode {
 	font-size: x-large;
 	text-align: center;
 	background-color: #CCC;
 	padding: .15in;
 	margin: .05in;
+}
+#mainArea {
+	width: 100%;
 }
 
 .ControlArea {

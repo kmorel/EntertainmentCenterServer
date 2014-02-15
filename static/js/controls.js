@@ -1,5 +1,51 @@
 // JavaScript Document
 
+function getButtonSize() {
+	var screenWidth = $(document).width();
+	var screenHeight = $(document).height();
+	// Use the state height as representative of the size of elements such as tabs.
+	var widgetHeight = $('#state').height();
+
+	// First guess, the display is 4 buttons across.
+	var buttonSize = screenWidth/4;
+	
+	// Check to make sure the display is tall enough for this size. The height
+	// must accomodate 4 buttons in the main area plus the power plus the mute
+	// plus potentially tabs.
+	if (screenHeight < buttonSize*6 + widgetHeight) {
+		buttonSize = (screenHeight - widgetHeight)/6;
+	}
+	
+	// Make sure that the button size is at least as high as the standard mobile widgets.
+	if (buttonSize < widgetHeight) {
+		buttonSize = widgetHeight;
+	}
+
+	return parseInt(buttonSize);
+}
+
+function initGUI() {
+	var buttonSize = getButtonSize();
+	var screenWidth = $(document).width();
+
+	$('.PowerSelect').offset({ top: 5, left:5 });
+	$('.PowerSelect').width(screenWidth - buttonSize - 15);
+
+	$('#powerButton').width(buttonSize);
+	$('#powerButton').height(buttonSize);
+	$('#powerButton').offset({ top:0, left:screenWidth - buttonSize - 5 });
+
+	$('#mainArea').offset({ top:buttonSize, left:0 });
+
+	$('#volumeArea').offset({ top:5*buttonSize, left:0 });
+	$('.VolumeSelect').position({ top:0, left:0 });
+	$('.VolumeSelect').width(screenWidth - buttonSize - 15);
+
+	$('#mute').width(buttonSize);
+	$('#mute').height(buttonSize);
+	$('#mute').offset({ top:5*buttonSize, left:screenWidth - buttonSize - 5 });
+}
+
 function switchToNavigation() {
 	var navigationAreaElements = document.getElementsByClassName("NavigationArea");
 	for (var eIndex = 0; eIndex < navigationAreaElements.length; eIndex++) {

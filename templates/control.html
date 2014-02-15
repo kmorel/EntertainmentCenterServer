@@ -18,18 +18,15 @@
 
 <body>
 <div class="PowerArea">
-  <div class="PowerButton"><img src="/static/icons/power-on.png" alt="Refresh On" onclick="sendMode()" /></div>  <label for="state"></label>
   <div class="PowerSelect">
     <select name="state" id="state" data-native-menu="false" onchange="sendMode()">
-      {% for mode in mode_list %}
-      <option value="{{ mode }}">{{ mode }}</option>
-      {% endfor %}
+      {% for mode in mode_list %}<option value="{{ mode }}">{{ mode }}</option>{% endfor %}
     </select>
   </div>
+  <img src="/static/icons/power-on.png" alt="Refresh On" name="powerButton" id="powerButton" onclick="sendMode()" />
 </div>
-<div class="MainArea">
+<div id="mainArea">
   <div class="ControlArea" id="TiVo">
-    <h1>TiVo</h1>
     <div class="ControlTabs">
       <ul>
         <li class="NavigationTab InactiveTab" onclick="switchToNavigation()">Navigation</li>
@@ -126,13 +123,13 @@
       {% endfor %}
   </div>
 </div>
-<div class="VolumeArea">
-  <div class="VolumeButton"><img src="/static/icons/volume-on.png" id="mute" onclick="toggleMute()" /></div>
+<div id="volumeArea">
   <div class="VolumeSelect">
     <form class="full-width-slider">
       <input id="volume" type="range" class="VolumeSlider" min="0" max="185" data-highlight="true" />
     </form>
   </div>
+  <img src="/static/icons/volume-on.png" id="mute" onclick="toggleMute()" />
 </div>
 <script type="text/javascript" src="/static/js/controls.js"></script>
 <script type="text/javascript">
@@ -148,6 +145,8 @@ $(document).ready(function() {
 		setVolume($('#volume').val());
 	});
 	setMuteFlag({{mute}});
+
+	initGUI();
 
 	// Specail way to remove address bar.
 	window.addEventListener("load",function() {
