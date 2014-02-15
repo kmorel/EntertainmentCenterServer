@@ -58,7 +58,6 @@
 	height: 100%;
 	width: 100%;
 	text-align: center;
-	clear: both;
 }
 .ControlArea h1 {
 	font-size: x-large;
@@ -86,7 +85,5 @@
 
 .ButtonPanel {
 	position: relative;
-	/* [disabled]width:100%; */
-	/* [disabled]padding-bottom:100%; */
-	/* [disabled]margin: auto; */
+	margin: auto;
 }
