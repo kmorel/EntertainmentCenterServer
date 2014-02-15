@@ -26,6 +26,14 @@
   <img src="/static/icons/power-on.png" alt="Refresh On" name="powerButton" id="powerButton" onclick="sendMode()" />
 </div>
 <div id="mainArea">
+  <div class="ControlArea" id="EverythingOff">
+    <h1>Select Mode</h1>
+    <ul data-role="listview">
+      {% for mode in on_mode_list %}
+        <li><a href="#" onclick="sendModeByName('{{mode}}')">{{mode}}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
   <div class="ControlArea" id="TiVo">
     <div data-role="tabs">
       <div data-role="navbar">
@@ -113,12 +121,6 @@
     <h1>No Controls for Wii</h1></div>
   <div class="ControlArea" id="Playstation2">
     <h1>No Controls for Playstation 2</h1>
-  </div>
-  <div class="ControlArea" id="EverythingOff">
-    <h1>Select Mode</h1>
-      {% for mode in on_mode_list %}
-        <div class="ButtonMode" onclick="sendModeByIndex({{loop.index0}})">{{mode}}</div>
-      {% endfor %}
   </div>
 </div>
 <div id="volumeArea">
