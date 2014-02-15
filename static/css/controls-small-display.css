@@ -1,34 +1,8 @@
 @charset "UTF-8";
 
-.ControlTabs {
-	display: inline;
-	font-size: xx-large;
-}
-
-.PowerButton {
-	width: 15%;
-}
-.PowerSelect {
-	padding-right: 20%;
-}
-.VolumeSelect {
-	padding-right: 20%;
-}
-
 .Button {
 	width: 25%;
 	height: 25%;
-}
-
-.NavigationAreaPlacement {
-	float: none;
-	width: 80%;
-	padding-left: 10%;
-}
-.PlaybackAreaPlacement {
-	float: none;
-	width: 80%;
-	padding-left: 10%;
 }
 
 .SkipBackLabel {
@@ -36,12 +10,4 @@
 }
 .SkipForwardLabel {
 	font-size: medium;
-}
-
-.HiddenPane {
-	display: none;
-}
-
-.InactiveTab {
-	color: #999;
 }

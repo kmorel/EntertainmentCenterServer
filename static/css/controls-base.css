@@ -10,6 +10,11 @@
 .PowerArea select {
 	width: 100%;
 }
+.PowerSelect {
+	display: inline-block;
+	margin-right: 5px;
+	margin-left: 5px;
+}
 
 #volumeArea {
 	width: 100%;
@@ -19,7 +24,9 @@
 	font-size: xx-large;
 }
 .VolumeSelect {
-	padding-top: 15px;
+	display: inline-block;
+	padding-bottom: 15px;
+	vertical-align: top;
 }
 
 .Button {
@@ -91,15 +98,9 @@
 	margin-right: 0.15in;
 }
 
-.NavigationArea {
+.ButtonPanel {
 	position: relative;
-	width:100%;
-	padding-bottom:100%;
-	margin: auto;
-}
-.PlaybackArea {
-	position: relative;
-	width:100%;
-	padding-bottom:100%;
-	margin: auto;
+	/* [disabled]width:100%; */
+	/* [disabled]padding-bottom:100%; */
+	/* [disabled]margin: auto; */
 }

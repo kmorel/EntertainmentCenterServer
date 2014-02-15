@@ -1,26 +1,7 @@
 @charset "UTF-8";
 /* CSS Document */
 
-.PowerButton {
-	width: 12.5%;
-}
-.VolumeSelect {
-	padding-right: 15%;
-}
-
 .Button {
 	width: 25%;
 	height: 25%;
-}
-
-.ControlTabs {
-	display: none;
-}
-.NavigationAreaPlacement {
-	float: left;
-	width: 47%;
-}
-.PlaybackAreaPlacement {
-	float: right;
-	width: 47%;
 }
