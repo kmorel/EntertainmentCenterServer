@@ -114,9 +114,9 @@
   <div class="ControlArea" id="Playstation2">
     <h1>No Controls for Playstation 2</h1>
   </div>
-  <div class="ControlArea" id="TurnEverythingOff">
+  <div class="ControlArea" id="EverythingOff">
     <h1>Select Mode</h1>
-      {% for mode in mode_list %}
+      {% for mode in on_mode_list %}
         <div class="ButtonMode" onclick="sendModeByIndex({{loop.index0}})">{{mode}}</div>
       {% endfor %}
   </div>

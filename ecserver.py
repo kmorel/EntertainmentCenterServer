@@ -14,6 +14,7 @@ def render_page():
                                  mute=int(control.getMute()), \
                                  volume=control.getVolume(), \
                                  mode_list=control.devices, \
+                                 on_mode_list=control.devices[1:], \
                                  start_mode=control.getCurrentState());
 
 @web.route('/set-volume/<int:level>')

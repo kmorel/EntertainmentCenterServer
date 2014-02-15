@@ -54,9 +54,9 @@ muteFlag = false;
 function setMuteFlag(flag) {
 	var imgElement = document.getElementById("mute");
 	if (flag) {
-		$('#mute').attr("src", "/static/icons/volume-mute.png");
+		$('#mute').attr('src', '/static/icons/volume-mute.png');
 	} else {
-		$('#mute').attr("src", "/static/icons/volume-on.png");
+		$('#mute').attr('src', '/static/icons/volume-on.png');
 	}
 	muteFlag = flag;
 }
@@ -84,6 +84,11 @@ function setUpSelectedMode() {
 			this.style.display = 'none';
 		}
 	});
+	if (modeName == 'Everything Off') {
+		$('#powerButton').attr('src', '/static/icons/power-off.png');
+	} else {
+		$('#powerButton').attr('src', '/static/icons/power-on.png');
+	}
 }
 
 function setUpModeByName(modeName) {

@@ -12,12 +12,12 @@ class ControlCentral:
 
     # If you add a new device, also added to the receiver list.
     devices = [
+        'Everything Off',
         'TiVo',
         'Blu-Ray',
         'XBox 360',
         'Wii',
-        'Playstation 2',
-        'Turn Everything Off' ]
+        'Playstation 2' ]
             
 
     _receiver = None
@@ -29,13 +29,13 @@ class ControlCentral:
 
     def getCurrentState(self):
         if self._receiver.getPower() == Switch.off:
-            return 'Turn Everything Off'
+            return 'Everything Off'
         else: # Power is on
             deviceName  = self._receiver.getInput()
             if deviceName in self.devices:
                 return deviceName
             else:
-                return 'Turn Everything Off'
+                return 'Everything Off'
 
     def getVolume(self):
         return self._receiver.getVolume()
@@ -50,7 +50,7 @@ class ControlCentral:
         self._receiver.volume(level)
 
     def changeMode(self, mode):
-        if mode == 'Turn Everything Off':
+        if mode == 'Everything Off':
             self._receiver.power(Switch.off)
         else:
             self._receiver.power(Switch.on)
