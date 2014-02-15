@@ -1,8 +1,8 @@
 // JavaScript Document
 
 function getButtonSize() {
-	var screenWidth = $(document).width();
-	var screenHeight = $(document).height();
+	var screenWidth = $(window).width();
+	var screenHeight = $(window).height();
 
 	// First guess, the display is 4 buttons across.
 	var buttonSize = screenWidth/4;
@@ -19,7 +19,7 @@ function getButtonSize() {
 
 function initGUI() {
 	var buttonSize = getButtonSize();
-	var screenWidth = $(document).width();
+	var screenWidth = $(window).width();
 	// Some padding to remove from widths to compensate for scroll bars,
 	// which tend to be larger on larger displays.
 	var widthFudge = 10;
@@ -52,7 +52,6 @@ function setVolume(newValue) {
 muteFlag = false;
 
 function setMuteFlag(flag) {
-	var imgElement = document.getElementById("mute");
 	if (flag) {
 		$('#mute').attr('src', '/static/icons/volume-mute.png');
 	} else {
