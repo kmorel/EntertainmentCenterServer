@@ -20,8 +20,14 @@ function getButtonSize() {
 function initGUI() {
 	var buttonSize = getButtonSize();
 	var screenWidth = $(document).width();
+	// Some padding to remove from widths to compensate for scroll bars,
+	// which tend to be larger on larger displays.
+	var widthFudge = 10;
+	if (screenWidth > 700) {
+		widthFudge = 40;
+	}
 
-	$('.PowerSelect').width(screenWidth - buttonSize - 50);
+	$('.PowerSelect').width(screenWidth - buttonSize - widthFudge - 10);
 
 	$('#powerButton').width(buttonSize);
 	$('#powerButton').height(buttonSize);
@@ -31,7 +37,7 @@ function initGUI() {
 
 //	$('#volumeArea').offset({ top:5*buttonSize, left:0 });
 //	$('.VolumeSelect').position({ top:0, left:0 });
-	$('.VolumeSelect').width(screenWidth - buttonSize - 40);
+	$('.VolumeSelect').width(screenWidth - buttonSize - widthFudge);
 
 	$('#mute').width(buttonSize);
 	$('#mute').height(buttonSize);
