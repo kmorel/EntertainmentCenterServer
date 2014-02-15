@@ -124,7 +124,7 @@
 <div id="volumeArea">
   <div class="VolumeSelect">
     <form class="full-width-slider">
-      <input id="volume" type="range" class="VolumeSlider" min="81" max="161" data-highlight="true" />
+      <input id="volume" type="range" class="VolumeSlider" min="81" max="141" data-highlight="true" />
     </form>
   </div>
   <img src="/static/icons/volume-on.png" id="mute" onclick="toggleMute()" />
@@ -133,7 +133,7 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	// Initialize mode
-	setUpModeByIndex({{start_mode_index}});
+	setUpModeByName('{{start_mode}}');
 	// Make text box next to slider read only.
 	$(".ui-slider-input").prop("readonly",true);
 	// Initialize volume, slider, and mute

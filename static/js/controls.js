@@ -32,16 +32,10 @@ function initGUI() {
 	$('#powerButton').width(buttonSize);
 	$('#powerButton').height(buttonSize);
 
-//	$('#mainArea').offset({ top:buttonSize, left:0 });
-//	$('#mainArea').height(4*buttonSize);
-
-//	$('#volumeArea').offset({ top:5*buttonSize, left:0 });
-//	$('.VolumeSelect').position({ top:0, left:0 });
 	$('.VolumeSelect').width(screenWidth - buttonSize - widthFudge);
 
 	$('#mute').width(buttonSize);
 	$('#mute').height(buttonSize);
-//	$('#mute').offset({ top:5*buttonSize, left:screenWidth - buttonSize - 5 });
 
 	$('.ButtonPanel').width(4*buttonSize);
 	$('.ButtonPanel').height(4*buttonSize);
@@ -60,9 +54,9 @@ muteFlag = false;
 function setMuteFlag(flag) {
 	var imgElement = document.getElementById("mute");
 	if (flag) {
-		imgElement.src = "/static/icons/volume-mute.png";
+		$('#mute').attr("src", "/static/icons/volume-mute.png");
 	} else {
-		imgElement.src = "/static/icons/volume-on.png";
+		$('#mute').attr("src", "/static/icons/volume-on.png");
 	}
 	muteFlag = flag;
 }
@@ -76,40 +70,36 @@ function toggleMute() {
 	sendMuteFlag(!muteFlag)
 }
 
-function getModeString(index) {
-	var selectElement = document.getElementById("state");
-	return selectElement.options[index].text;
+function getModeString() {
+	return $('#state').val();
 }
 
 function setUpSelectedMode() {
-	var index = document.getElementById("state").selectedIndex;
-	var modeName = getModeString(index);
+	var modeName = getModeString();
 	var modeId = modeName.replace(/\s/g, "");
-	var controlAreaElements = document.getElementsByClassName("ControlArea");
-	for (var eIndex = 0; eIndex < controlAreaElements.length; eIndex++) {
-		var element = controlAreaElements[eIndex];
-		if (element.id == modeId) {
-			element.style.display = "";
+	$('.ControlArea').each(function(index) {
+		if (this.id == modeId) {
+			this.style.display = '';
 		} else {
-			element.style.display = "none";
+			this.style.display = 'none';
 		}
-	}
+	});
 }
 
-function setUpModeByIndex(index) {
-	document.getElementById("state").selectedIndex = index;
-	setUpSelectedMode()
-}
-
-function sendMode() {
-	var index = document.getElementById("state").selectedIndex;
-	pushToPage("/set-mode/" + getModeString(index));
+function setUpModeByName(modeName) {
+	$('#state').val(modeName).attr('selected', true).siblings('option').removeAttr('selected');
+	$('#state').selectmenu('refresh', true);
 	setUpSelectedMode();
 }
 
-function sendModeByIndex(index) {
-	document.getElementById("state").selectedIndex = index;
-	sendMode()
+function sendMode() {
+	pushToPage("/set-mode/" + getModeString());
+	setUpSelectedMode();
+}
+
+function sendModeByName(modeName) {
+	setUpModeByName(modeName);
+	sendMode();
 }
 
 function sendTiVo(ircode) {

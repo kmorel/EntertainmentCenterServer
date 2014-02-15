@@ -30,7 +30,7 @@ class ControlCentral:
     def getCurrentState(self):
         if self._receiver.getPower() == Switch.off:
             return 'Turn Everything Off'
-        else: # Power is off
+        else: # Power is on
             deviceName  = self._receiver.getInput()
             if deviceName in self.devices:
                 return deviceName
