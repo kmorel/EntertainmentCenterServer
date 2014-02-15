@@ -4,8 +4,8 @@ function getButtonSize() {
 	var screenWidth = $(window).width();
 	var screenHeight = $(window).height();
 
-	// First guess, the display is 4 buttons across.
-	var buttonSize = screenWidth/4;
+	// First guess, the display is 6 buttons across.
+	var buttonSize = screenWidth/6;
 	
 	// Check to make sure the display is tall enough for this size. The height
 	// must accomodate 4 buttons in the main area plus the power plus the mute
@@ -37,7 +37,7 @@ function initGUI() {
 	$('#mute').width(buttonSize);
 	$('#mute').height(buttonSize);
 
-	$('.ButtonPanel').width(4*buttonSize);
+	$('.ButtonPanel').width(6*buttonSize);
 	$('.ButtonPanel').height(4*buttonSize);
 }
 

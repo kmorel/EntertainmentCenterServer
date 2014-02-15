@@ -35,6 +35,8 @@
 	vertical-align: middle;
 	display:inline;
 	position: absolute;
+	width: 16.6%;
+	height: 25%;
 }
 .TextButton {
 	text-align: center;
@@ -69,14 +71,14 @@
 }
 
 .SkipBackLabel {
-	font-size: x-small;
+	/* [disabled]font-size: x-small; */
 	text-align: left;
 	position: absolute;
 	display: inline;
 	background-color: #FFF;
 }
 .SkipForwardLabel {
-	font-size: x-small;
+	/* [disabled]font-size: x-small; */
 	text-align: right;
 	position: absolute;
 	display: inline;
