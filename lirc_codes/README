@@ -1,0 +1,12 @@
+This directory is a collection of IR codes that eventually go to an LIRC
+configure file. The assumption is that most of the codes originate from
+a pronto code posted on the internet and are eventually converted to LIRC
+hex codes. To do that, make a text file named <device>.pronto with each
+line of the form <code name>:<pronto code>. Then run the pronto2hex script,
+which uses pronto2lirc.py and irrecord to convert to a LIRC configuration
+file named <device>.lircd.conf.
+
+Once you have codes for all the devices you want to support, cat them
+together into a file called lircd.conf and copy them to the /etc/lirc
+directory. (You may want to save the original file there.)
+

@@ -1,0 +1,35 @@
+#!/bin/sh
+
+
+usage () {
+    echo "USAGE: `basename $0` <pronto file>"
+    exit 1
+}
+
+pronto_file=$1
+if [ ! -f "$pronto_file" ] ; then
+    echo "Cannot find input file '$pronto_file'"
+    usage
+fi
+
+if [ -f lircd.conf ] ; then
+    echo "Move or delete lircd.conf."
+    exit 1
+fi
+
+echo "Creating lircd.conf..."
+python `dirname $0`/pronto2lirc.py $pronto_file
+if [ ! -f lircd.conf ] ; then
+    echo "Failed to create lircd.conf. Quiting."
+    exit 1
+fi
+
+hex_file=`basename $pronto_file .pronto`.lircd.conf
+echo "Creating $hex_file..."
+irrecord -a lircd.conf > $hex_file
+
+echo "Removing lircd.conf..."
+rm lircd.conf
+
+echo "Done"
+
