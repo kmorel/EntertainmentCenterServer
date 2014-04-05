@@ -2,6 +2,7 @@
 
 from eccontrols import *
 from eccontrols import pioneer
+from eccontrols import sony
 from eccontrols import tivo
 
 import copy
@@ -22,10 +23,12 @@ class ControlCentral:
 
     _receiver = None
     _tivo = None
+    _tv = None
 
     def __init__(self):
         self._receiver = pioneer.Receiver()
         self._tivo = tivo.TiVo()
+        self._tv = sony.TV()
 
     def getCurrentState(self):
         if self._receiver.getPower() == Switch.off:
@@ -51,8 +54,10 @@ class ControlCentral:
 
     def changeMode(self, mode):
         if mode == 'Everything Off':
+            self._tv.ircode('power-off')
             self._receiver.power(Switch.off)
         else:
+            self._tv.ircode('power-on')
             self._receiver.power(Switch.on)
             time.sleep(1)
             self._receiver.input(mode)

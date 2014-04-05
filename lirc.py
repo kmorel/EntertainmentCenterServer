@@ -68,3 +68,5 @@ the command is sustained in milliseconds."""
         subprocess.call(['irsend', 'SEND_START', device_id, command])
         time.sleep(0.001*duration)
         subprocess.call(['irsend', 'SEND_STOP', device_id, command])
+
+lirc = Lirc()
