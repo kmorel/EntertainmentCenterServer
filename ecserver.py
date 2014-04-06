@@ -101,6 +101,30 @@ def tivo_goto(screen):
         print e
     return str(screen)
 
+@web.route('/tv/send/<command>')
+def tv_send(command):
+    try:
+        print 'TV Command:', command
+        control.sendTV(command)
+    except Exception, e:
+        print e.message
+    except:
+        e = sys.exc_info()[0]
+        print e
+    return str(command)
+
+@web.route('/bluray/send/<command>')
+def bluray_send(command):
+    try:
+        print 'Blu-Ray Command:', command
+        control.sendBluRay(command)
+    except Exception, e:
+        print e.message
+    except:
+        e = sys.exc_info()[0]
+        print e
+    return str(command)
+
 @web.route('/log/<entry>')
 def log(entry):
     try:

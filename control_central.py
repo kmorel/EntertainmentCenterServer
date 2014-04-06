@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
 from eccontrols import *
+from eccontrols import generic
 from eccontrols import pioneer
-from eccontrols import sony
 from eccontrols import tivo
 
 import copy
@@ -21,14 +21,16 @@ class ControlCentral:
         'Playstation 2' ]
             
 
+    _bluray = None
     _receiver = None
     _tivo = None
     _tv = None
 
     def __init__(self):
+        self._bluray = generic.GenericIR('SonyBluRay')
         self._receiver = pioneer.Receiver()
         self._tivo = tivo.TiVo()
-        self._tv = sony.TV()
+        self._tv = generic.GenericIR('SonyTV')
 
     def getCurrentState(self):
         if self._receiver.getPower() == Switch.off:
@@ -54,13 +56,16 @@ class ControlCentral:
 
     def changeMode(self, mode):
         if mode == 'Everything Off':
-            self._tv.ircode('power-off')
+            self._tv.send('power-off')
             self._receiver.power(Switch.off)
+            self._bluray.send('power-off')
         else:
-            self._tv.ircode('power-on')
+            self._tv.send('power-on')
             self._receiver.power(Switch.on)
             time.sleep(1)
             self._receiver.input(mode)
+            if mode == 'Blu-Ray':
+                self._bluray.send('power-on')
             #TODO set up other devices
 
     def sendTiVo(self, ircode):
@@ -74,6 +79,12 @@ class ControlCentral:
 
     def gotoTiVoScreen(self, screen):
         self._tivo.teleport(screen)
+
+    def sendTV(self, command):
+        self._tv.send(command)
+
+    def sendBluRay(self, command):
+        self._bluray.send(command)
 
 if __name__ == '__main__':
     control = ControlCentral()
