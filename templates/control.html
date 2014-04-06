@@ -131,7 +131,91 @@
     </div>
   </div>
   <div class="ControlArea" id="Blu-Ray">
-    <h1>No Controls for Blu-Ray</h1>
+    <div data-role="tabs">
+      <div data-role="navbar">
+        <ul>
+          <li><a href="#playbackArea" data-ajax="false">Playback</a></li>
+          <li><a href="#navigationArea" data-ajax="false">Navigation</a></li>
+        </ul>
+      </div>
+      <div id="playbackArea" class="ButtonPanel">
+        <div class="Button" style="left:22%;" onclick="sendBluRay('play')">
+          <img src="/static/icons/playback-play.png" alt="Play" />
+        </div>
+        <div class="Button" style="left:40%; width:35%; height:35%;" onclick="sendBluRay('pause')">
+          <img src="/static/icons/playback-pause.png" alt="Pause" />
+        </div>
+        <div class="Button" style="left:0%; top:25%;" onclick="sendBluRay('seek-backward')">
+          <img src="/static/icons/playback-seek-back.png" alt="Seek Backward" />
+        </div>
+        <div class="Button" style="left:83.3%; top:25%;" onclick="sendBluRay('seek-forward')">
+          <img src="/static/icons/playback-seek-forward.png" alt="Seek Forward" />
+        </div>
+        <!--
+        <div class="Button" style="left:0%; bottom:10%;" onclick="sendBluRayBack(60)">
+          <img src="/static/icons/playback-skip-back-time.png" alt="Back 1 Minute" />
+        </div>
+        <div class="SkipBackLabel" style="left:0%; bottom:10%">1 min</div>
+        <div class="Button" style="left:16.6%; bottom:10%;" onclick="sendBluRayBack(30)">
+          <img src="/static/icons/playback-skip-back-time.png" alt="Back 30 Seconds" />
+        </div>
+        <div class="SkipBackLabel" style="left:16.6%; bottom:10%">30 sec</div>
+        <div class="Button" style="left:33.3%; bottom:10%;" onclick="sendBluRayBack(8)">
+          <img src="/static/icons/playback-skip-back-time.png" alt="Back 8 Seconds" />
+        </div>
+        <div class="SkipBackLabel" style="left:33.3%; bottom:10%">8 sec</div>
+        <div class="Button" style="right:33.3%; bottom:15%;" onclick="sendBluRayForward(8)">
+          <img src="/static/icons/playback-skip-forward-time.png" alt="Forward 8 Seconds" />
+        </div>
+        <div class="SkipForwardLabel" style="right:33.3%; bottom:15%">8 sec</div>
+        <div class="Button" style="right:16.6%; bottom:15%;" onclick="sendBluRayForward(30)">
+          <img src="/static/icons/playback-skip-forward-time.png" alt="Forward 30 Seconds" />
+        </div>
+        <div class="SkipForwardLabel" style="right:16.6%; bottom:15%">30 sec</div>
+        <div class="Button" style="right:0%; bottom:15%;" onclick="sendBluRayForward(60)">
+          <img src="/static/icons/playback-skip-forward-time.png" alt="Forward 1 Minute" />
+        </div>
+        <div class="SkipForwardLabel" style="right:0%; bottom:15%">1 min</div>
+        -->
+      </div>
+      <div id="navigationArea" class="ButtonPanel">
+        <div class="Button" style="left:0in; top:0in;" onclick="sendBluRay('top-menu')" >
+          <div class="TextButton">Top Menu</div>
+        </div>
+        <div class="Button" style="left:83.4%; top:0%;" onclick="sendBluRay('pop-up-menu')" >
+          <div class="TextButton">Pop Up / Menu</div>
+        </div>
+        <div class="Button" style="left:41.6%; top:12.5%;" onclick="sendBluRay('up')" >
+          <img src="/static/icons/navigate-up.png" alt="Up" />
+        </div>
+        <div class="Button" style="left:25%; top:37.5%;" onclick="sendBluRay('left')">
+          <img src="/static/icons/navigate-left.png" alt="Left" />
+        </div>
+        <div class="Button" style="left:41.6%; top:37.5%;" onclick="sendBluRay('select')">
+          <img src="/static/icons/navigate-select.png" alt="Select" />
+        </div>
+        <div class="Button" style="left:58.3%; top:37.5%;" onclick="sendBluRay('right')">
+          <img src="/static/icons/navigate-right.png" alt="Right" />
+        </div>
+        <div class="Button" style="left:41.6%; top:62.5%;" onclick="sendBluRay('down')">
+          <img src="/static/icons/navigate-down.png" alt="Down" />
+        </div>
+        <!--
+        <div class="Button" style="left:59%; top:5%;" onclick="sendBluRay('channel-up')">
+          <img src="/static/icons/channel-up.png" alt="Channel Up" />
+        </div>
+        <div class="Button" style="left:59%; top:70%;" onclick="sendBluRay('channel-down')">
+          <img src="/static/icons/channel-down.png" alt="Channel Down" />
+        </div>
+        -->
+        <div class="Button" style="left:0%; top:75%;" onclick="sendBluRay('system-menu')">
+          <div class="TextButton">System Menu</div>
+        </div>
+        <div class="Button" style="left:83.4%; top:75%;" onclick="sendBluRay('return')">
+          <img src="/static/icons/navigate-return.png" alt="Return" />
+        </div>
+      </div>
+    </div>
   </div>
   <div class="ControlArea" id="XBox360">
     <h1>No Controls XBox 360</h1>

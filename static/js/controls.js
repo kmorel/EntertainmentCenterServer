@@ -121,3 +121,7 @@ function sendTiVoForward(t) {
 function sendTiVoGoTo(screen) {
 	pushToPage("/tivo/goto/" + screen);
 }
+
+function sendBluRay(command) {
+	pushToPage("/bluray/send/" + command);
+}
