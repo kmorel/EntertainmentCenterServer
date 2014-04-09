@@ -3,6 +3,8 @@
 from eccontrols import *
 
 import socket
+import sys
+import threading
 import time
 
 class Receiver:
@@ -11,6 +13,7 @@ class Receiver:
     port = 23
 
     _connection = None
+    _connectionLock = None
 
     _power = None
     _volume = None
@@ -27,44 +30,59 @@ class Receiver:
         }
 
     def _getStatus(self):
-        gotData = False
-        while True:
-            try:
-                data = self._connection.recv(1024).split()
-                gotData = True
-                for status in data:
-                    print status
-                    if status.startswith('PWR'):
-                        if status[3] == '0':
-                            self._power = Switch.on
-                        elif status[3] == '1':
-                            self._power = Switch.off
-                        else:
-                            print 'Unknown power:', status[3:]
-                    elif status.startswith('VOL'):
-                        self._volume = int(status[3:])
-                    elif status.startswith('MUT'):
-                        if status[3] == '0':
-                            self._mute = Switch.on
-                        elif status[3] == '1':
-                            self._mute = Switch.off
-                        else:
-                            print 'Unknown power:', status[3:]
-                    elif status.startswith('FN'):
-                        self._input = int(status[2:])
-            except socket.error:
-                break;
+        self._connectionLock.acquire()
+        try:
+            gotData = False
+            while True:
+                try:
+                    data = self._connection.recv(1024).split()
+                    gotData = True
+                    for status in data:
+                        print status
+                        if status.startswith('PWR'):
+                            if status[3] == '0':
+                                self._power = Switch.on
+                            elif status[3] == '1':
+                                self._power = Switch.off
+                            else:
+                                print 'Unknown power:', status[3:]
+                        elif status.startswith('VOL'):
+                            self._volume = int(status[3:])
+                        elif status.startswith('MUT'):
+                            if status[3] == '0':
+                                self._mute = Switch.on
+                            elif status[3] == '1':
+                                self._mute = Switch.off
+                            else:
+                                print 'Unknown power:', status[3:]
+                        elif status.startswith('FN'):
+                            self._input = int(status[2:])
+                except socket.error:
+                    break;
+        finally:
+            self._connectionLock.release()
         return gotData
 
-    def _sendCommand(self, command, waitForResponse=False):
+    def _flushStatus(self):
+        print "[", time.strftime("%Y-%m-%d %H:%M:%S"), "] Flushing Pioneer Receiver status."
+        sys.stdout.flush()
         self._getStatus()
-        self._connection.send(command + '\r\n')
-        if waitForResponse:
-            while True:
-                if self._getStatus():
-                    break
+        threading.Timer(15, self._flushStatus).start()
+
+    def _sendCommand(self, command, waitForResponse=False):
+        self._connectionLock.acquire()
+        try:
+            self._getStatus()
+            self._connection.send(command + '\r\n')
+            if waitForResponse:
+                while True:
+                    if self._getStatus():
+                        break
+        finally:
+            self._connectionLock.release()
 
     def __init__(self):
+        self._connectionLock = threading.RLock()
         while not self._connection:
             try:
                 self._connection = socket.create_connection((self.hostname,self.port))
@@ -73,7 +91,7 @@ class Receiver:
         self._connection.setblocking(0)
         self._sendCommand('')
         time.sleep(0.1)
-        self._getStatus()
+        self._flushStatus()
 
     def getPower(self):
         self._sendCommand('?P', True)

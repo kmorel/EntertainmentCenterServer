@@ -3,6 +3,8 @@
 from eccontrols import *
 
 import socket
+import sys
+import threading
 import time
 
 class TiVo:
@@ -11,11 +13,35 @@ class TiVo:
     port = 31339
 
     _connection = None
+    _connectionLock = None
+
+    def _getStatus(self):
+        self._connectionLock.acquire()
+        try:
+            while True:
+                try:
+                    # Eat buffer.
+                    self._connection.recv(1024)
+                except socket.error:
+                    break;
+        finally:
+            self._connectionLock.release()
+
+    def _flushStatus(self):
+        print "[", time.strftime("%Y-%m-%d %H:%M:%S"), "] Flushing TiVo status."
+        sys.stdout.flush()
+        self._getStatus()
+        threading.Timer(61, self._flushStatus).start()
 
     def _sendCommand(self, command):
-        self._connection.send(command + '\r\n')
+        self._connectionLock.acquire()
+        try:
+            self._connection.send(command + '\r\n')
+        finally:
+            self._connectionLock.release()
 
     def __init__(self):
+        self._connectionLock = threading.RLock()
         while not self._connection:
             try:
                 self._connection = socket.create_connection((self.hostname,self.port))
@@ -24,6 +50,7 @@ class TiVo:
         self._connection.setblocking(0)
         self._sendCommand('')
         time.sleep(0.1)
+        self._flushStatus()
 
     screens = [ 'TiVo', 'LiveTV', 'Guide', 'NowPlaying' ]
 
