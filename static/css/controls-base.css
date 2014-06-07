@@ -75,17 +75,21 @@
 	text-align: left;
 	position: absolute;
 	display: inline;
-	background-color: #FFF;
+	background-color: #000;
 }
 .SkipForwardLabel {
 	/* [disabled]font-size: x-small; */
 	text-align: right;
 	position: absolute;
 	display: inline;
-	background-color: #FFF;
+	background-color: #000;
 }
 
 .ButtonPanel {
 	position: relative;
 	margin: auto;
+}
+body {
+	color: #CCC;
+	background-color: #000;
 }
