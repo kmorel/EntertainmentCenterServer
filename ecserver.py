@@ -136,4 +136,4 @@ def log(entry):
         print e
 
 if __name__ == '__main__':
-    web.run(host='0.0.0.0', port=5000)
+    web.run(host='0.0.0.0', port=80)
