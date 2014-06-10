@@ -21,6 +21,7 @@ def render_page():
 def set_volume(level):
     try:
         print 'Set volume: %s' % level
+        sys.stdout.flush()
         control.volume(level)
     except Exception, e:
         print e.message
@@ -33,6 +34,7 @@ def set_volume(level):
 def set_mute(flag):
     try:
         print 'Set mute: %s' % flag
+        sys.stdout.flush()
         control.mute(flag)
     except Exception, e:
         print e.message
@@ -45,6 +47,7 @@ def set_mute(flag):
 def set_mode(mode):
     try:
         print 'Set mode: %s' % mode
+        sys.stdout.flush()
         control.changeMode(mode)
     except Exception, e:
         print e.message
@@ -57,6 +60,7 @@ def set_mode(mode):
 def tivo_ircommand(ircode):
     try:
         print 'TiVo IR Code: %s' % ircode
+        sys.stdout.flush()
         control.sendTiVo(ircode)
     except Exception, e:
         print e.message
@@ -69,6 +73,7 @@ def tivo_ircommand(ircode):
 def tivo_skip_back(t):
     try:
         print 'TiVo Skip Back: %d' % t
+        sys.stdout.flush()
         control.sendTiVoSecondsBack(t)
     except Exception, e:
         print e.message
@@ -81,6 +86,7 @@ def tivo_skip_back(t):
 def tivo_skip_forward(t):
     try:
         print 'TiVo Skip Forward: %d' % t
+        sys.stdout.flush()
         control.sendTiVoSecondsForward(t)
     except Exception, e:
         print e.message
@@ -93,6 +99,7 @@ def tivo_skip_forward(t):
 def tivo_goto(screen):
     try:
         print 'TiVo Go To: %s' % screen
+        sys.stdout.flush()
         control.gotoTiVoScreen(screen)
     except Exception, e:
         print e.message
@@ -105,6 +112,7 @@ def tivo_goto(screen):
 def tv_send(command):
     try:
         print 'TV Command:', command
+        sys.stdout.flush()
         control.sendTV(command)
     except Exception, e:
         print e.message
@@ -117,6 +125,7 @@ def tv_send(command):
 def bluray_send(command):
     try:
         print 'Blu-Ray Command:', command
+        sys.stdout.flush()
         control.sendBluRay(command)
     except Exception, e:
         print e.message
@@ -129,6 +138,7 @@ def bluray_send(command):
 def log(entry):
     try:
         print entry
+        sys.stdout.flush()
     except Exception, e:
         print e.message
     except:
