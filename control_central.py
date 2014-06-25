@@ -11,7 +11,7 @@ import time
 class ControlCentral:
     """Manages the organized control of all components in my entertainment center."""
 
-    # If you add a new device, also added to the receiver list.
+    # If you add a new device, also add to the receiver list.
     devices = [
         'Everything Off',
         'TiVo',
@@ -28,8 +28,8 @@ class ControlCentral:
 
     def __init__(self):
         self._bluray = generic.GenericIR('SonyBluRay')
-        self._receiver = pioneer.Receiver()
-        self._tivo = tivo.TiVo()
+        self._receiver = generic.GenericIR('PioneerReceiver')
+        self._tivo = generic.GenericIR('TiVo')
         self._tv = generic.GenericIR('SonyTV')
 
     def getCurrentState(self):
