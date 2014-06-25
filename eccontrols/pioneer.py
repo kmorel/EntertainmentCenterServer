@@ -1,13 +1,14 @@
 #!/usr/bin/env python
 
 from eccontrols import *
+from eccontrols.generic import GenericIR
 
 import socket
 import sys
 import threading
 import time
 
-class Receiver:
+class ReceiverSocket:
     """Controls a Pioneer receiver through a web interface."""
     hostname = 'vsx-60.local'
     port = 23
@@ -156,7 +157,93 @@ the receiver's input code."""
         else:
             raise Exception('No such input: %s' % description)
 
+class ReceiverIR(GenericIR):
+    """Controls a Pioneer receiver through an IR interface."""
+
+    # Would be better off in configuration
+    inputs = {
+        'Wii': 'INPUT-DVD',
+        'TiVo': 'INPUT-SAT-CBL',
+        'Playstation 2': 'INPUT-DVD-BDR',
+        'XBox 360': 'INPUT-HDMI-6',
+        'Blu-Ray': 'INPUT-BD'
+        }
+
+    _power = None
+    _volume = None
+    _mute = None
+    _input = None
+
+    def __init__(self):
+        GenericIR.__init__(self, 'PioneerReceiver')
+        self._power = Switch.off
+        self._volume = 111
+        self._mute = Switch.off
+        self._input = 'TiVo'
+
+    def getPower(self):
+        return self._power
+
+    def power(self, flag=Switch.toggle):
+        if flag == Switch.toggle:
+            flag = ToggleSwitch(self.getPower())
+        if flag == Switch.off:
+            self.send('power-off')
+        elif flag == Switch.on:
+            self.send('power-on')
+        else:
+            raise Exception('No such switch flag for power: %s' % flag)
+        self._power = flag
+
+    def getVolume(self):
+        return self._volume
+
+    def volume(self, value):
+        """Set the volume. The volume is an integer in the range 0 to 185 where
+0 is no volume, 1 is -80 dB, 161 is 0 dB, and 185 is +12 dB"""
+        for i in xrange(self._volume, value):
+            self.send('volume-up')
+            time.sleep(0.05)
+        for i in xrange(value, self._volume):
+            self.send('volume-down')
+            time.sleep(0.05)
+        self._volume = value
+
+    def getMute(self):
+        return self._mute
+
+    def mute(self, flag=Switch.toggle):
+        if flag == Switch.toggle:
+            flag = ToggleSwitch(self.getMute())
+        if flag == Switch.off:
+            self.send('mute-off')
+        elif flag == Switch.on:
+            self.send('mute-on')
+        else:
+            raise Exception('No such switch flag for power: %s' % flag)
+        self._mute = flag
+
+    def getInput(self):
+        return self._input
+
+    def input(self, description):
+        """Change the input to the given description. The description must match
+a key in the inputs dictionary field or be an integer matching
+the receiver's input code."""
+        if description in self.inputs:
+            self.send(self.inputs[description])
+            self._input = description
+        else:
+            raise Exception('No such input: %s' % description)
+
 if __name__ == '__main__':
-    receiver = Receiver()
-    print 'Power', receiver.getPower()
-    print 'Volume', receiver.getVolume()
+    receiver = ReceiverIR()
+    receiver.input('Blu-Ray')
+    time.sleep(1)
+    receiver.input('Wii')
+    time.sleep(1)
+    receiver.input('TiVo')
+    time.sleep(1)
+    receiver.input('Playstation 2')
+    time.sleep(1)
+    receiver.input('XBox 360')

@@ -106,8 +106,8 @@ function sendModeByName(modeName) {
 	sendMode();
 }
 
-function sendTiVo(ircode) {
-	pushToPage("/tivo/ircommand/" + ircode);
+function sendTiVo(command) {
+	pushToPage("/tivo/send/" + command);
 }
 
 function sendTiVoBack(t) {
@@ -118,9 +118,9 @@ function sendTiVoForward(t) {
 	pushToPage("/tivo/skip-forward/" + t);
 }
 
-function sendTiVoGoTo(screen) {
-	pushToPage("/tivo/goto/" + screen);
-}
+//function sendTiVoGoTo(screen) {
+//	pushToPage("/tivo/goto/" + screen);
+//}
 
 function sendBluRay(command) {
 	pushToPage("/bluray/send/" + command);
