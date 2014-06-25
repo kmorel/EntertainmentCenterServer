@@ -1,13 +1,14 @@
 #!/usr/bin/env python
 
 from eccontrols import *
+from eccontrols.generic import GenericIR
 
 import socket
 import sys
 import threading
 import time
 
-class Receiver:
+class ReceiverSocket:
     """Controls a Pioneer receiver through a web interface."""
     hostname = 'vsx-60.local'
     port = 23
@@ -156,7 +157,38 @@ the receiver's input code."""
         else:
             raise Exception('No such input: %s' % description)
 
+class ReceiverIR(GenericIR):
+    """Controls a Pioneer receiver through an IR interface."""
+
+    # Would be better off in configuration
+    inputs = {
+        'Wii': 'INPUT-DVD',
+        'TiVo': 'INPUT-SAT-CBL',
+        'Playstation 2': 'INPUT-DVD-BDR',
+        'XBox 360': 'INPUT-HDMI-6',
+        'Blu-Ray': 'INPUT-BD'
+        }
+
+    def __init__(self):
+        GenericIR.__init__(self, 'PioneerReceiver')
+
+    def input(self, description):
+        """Change the input to the given description. The description must match
+a key in the inputs dictionary field or be an integer matching
+the receiver's input code."""
+        if description in self.inputs:
+            self.send(self.inputs[description])
+        else:
+            raise Exception('No such input: %s' % description)
+
 if __name__ == '__main__':
-    receiver = Receiver()
-    print 'Power', receiver.getPower()
-    print 'Volume', receiver.getVolume()
+    receiver = ReceiverIR()
+    receiver.input('Blu-Ray')
+    time.sleep(1)
+    receiver.input('Wii')
+    time.sleep(1)
+    receiver.input('TiVo')
+    time.sleep(1)
+    receiver.input('Playstation 2')
+    time.sleep(1)
+    receiver.input('XBox 360')
