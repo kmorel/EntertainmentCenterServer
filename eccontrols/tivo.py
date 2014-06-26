@@ -1,13 +1,14 @@
 #!/usr/bin/env python
 
 from eccontrols import *
+from eccontrols.generic import GenericIR
 
 import socket
 import sys
 import threading
 import time
 
-class TiVo:
+class TiVoSocket:
     """Controls a TiVo DVR through a web interface."""
     hostname = '10.0.0.7'
     port = 31339
@@ -129,4 +130,38 @@ defined in the codes field."""
         self.ircode('seek-forward')
         time.sleep(0.05)
         self.ircode('play')
+
+
+class TiVoIR(GenericIR):
+    """Controls a TiVo DVR through an IR interface."""
+
+    def __init__(self):
+        GenericIR.__init__(self, 'TiVo')
+
+    def fastReverse(self):
+        self.send('SEEK-BACKWARD')
+        self.send('SEEK-BACKWARD')
+        self.send('SEEK-BACKWARD')
+
+    def fastForward(self):
+        self.send('SEEK-FORWARD')
+        self.send('SEEK-FORWARD')
+        self.send('SEEK-FORWARD')
+
+    def secondsBack(self, t):
+        if int(t) < 9:
+            self.send('REPLAY')
+        else:
+            self.send('PLAY')
+            self.fastReverse()
+            time.sleep(float(t)/32)
+            self.fastForward()
+            self.send('PLAY')
+
+    def secondsForward(self, t):
+        self.send('PLAY')
+        self.fastForward()
+        time.sleep(float(t)/32)
+        self.fastReverse()
+        self.send('PLAY')
 

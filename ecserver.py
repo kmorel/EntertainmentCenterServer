@@ -17,31 +17,31 @@ def render_page():
                                  on_mode_list=control.devices[1:], \
                                  start_mode=control.getCurrentState());
 
-@web.route('/set-volume/<int:level>')
-def set_volume(level):
-    try:
-        print 'Set volume: %s' % level
-        sys.stdout.flush()
-        control.volume(level)
-    except Exception, e:
-        print e.message
-    except:
-        e = sys.exc_info()[0]
-        print e
-    return str(level)
+# @web.route('/set-volume/<int:level>')
+# def set_volume(level):
+#     try:
+#         print 'Set volume: %s' % level
+#         sys.stdout.flush()
+#         control.volume(level)
+#     except Exception, e:
+#         print e.message
+#     except:
+#         e = sys.exc_info()[0]
+#         print e
+#     return str(level)
 
-@web.route('/set-mute/<int:flag>')
-def set_mute(flag):
-    try:
-        print 'Set mute: %s' % flag
-        sys.stdout.flush()
-        control.mute(flag)
-    except Exception, e:
-        print e.message
-    except:
-        e = sys.exc_info()[0]
-        print e
-    return str(flag)
+# @web.route('/set-mute/<int:flag>')
+# def set_mute(flag):
+#     try:
+#         print 'Set mute: %s' % flag
+#         sys.stdout.flush()
+#         control.mute(flag)
+#     except Exception, e:
+#         print e.message
+#     except:
+#         e = sys.exc_info()[0]
+#         print e
+#     return str(flag)
 
 @web.route('/set-mode/<mode>')
 def set_mode(mode):
@@ -56,18 +56,31 @@ def set_mode(mode):
         print e
     return str(mode)
 
-@web.route('/tivo/ircommand/<ircode>')
-def tivo_ircommand(ircode):
+@web.route('/receiver/send/<command>')
+def receiver_send(command):
     try:
-        print 'TiVo IR Code: %s' % ircode
+        print 'Receiver IR Code: %s' % command
         sys.stdout.flush()
-        control.sendTiVo(ircode)
+        control.sendReceiver(command)
     except Exception, e:
         print e.message
     except:
         e = sys.exc_info()[0]
         print e
-    return str(ircode)
+    return str(command)
+
+@web.route('/tivo/send/<command>')
+def tivo_send(command):
+    try:
+        print 'TiVo IR Code: %s' % command
+        sys.stdout.flush()
+        control.sendTiVo(command)
+    except Exception, e:
+        print e.message
+    except:
+        e = sys.exc_info()[0]
+        print e
+    return str(command)
 
 @web.route('/tivo/skip-back/<int:t>')
 def tivo_skip_back(t):
@@ -95,18 +108,18 @@ def tivo_skip_forward(t):
         print e
     return str(t)
 
-@web.route('/tivo/goto/<screen>')
-def tivo_goto(screen):
-    try:
-        print 'TiVo Go To: %s' % screen
-        sys.stdout.flush()
-        control.gotoTiVoScreen(screen)
-    except Exception, e:
-        print e.message
-    except:
-        e = sys.exc_info()[0]
-        print e
-    return str(screen)
+# @web.route('/tivo/goto/<screen>')
+# def tivo_goto(screen):
+#     try:
+#         print 'TiVo Go To: %s' % screen
+#         sys.stdout.flush()
+#         control.gotoTiVoScreen(screen)
+#     except Exception, e:
+#         print e.message
+#     except:
+#         e = sys.exc_info()[0]
+#         print e
+#     return str(screen)
 
 @web.route('/tv/send/<command>')
 def tv_send(command):

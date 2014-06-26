@@ -29,56 +29,34 @@ class ControlCentral:
     def __init__(self):
         self._bluray = generic.GenericIR('SonyBluRay')
         self._receiver = pioneer.ReceiverIR()
-        self._tivo = generic.GenericIR('TiVo')
+        self._tivo = tivo.TivoIR()
         self._tv = generic.GenericIR('SonyTV')
-
-    def getCurrentState(self):
-        if self._receiver.getPower() == Switch.off:
-            return 'Everything Off'
-        else: # Power is on
-            deviceName  = self._receiver.getInput()
-            if deviceName in self.devices:
-                return deviceName
-            else:
-                return 'Everything Off'
-
-    def getVolume(self):
-        return self._receiver.getVolume()
-
-    def getMute(self):
-        return self._receiver.getMute()
-
-    def mute(self, flag):
-        self._receiver.mute(flag)
-
-    def volume(self, level):
-        self._receiver.volume(level)
 
     def changeMode(self, mode):
         if mode == 'Everything Off':
             self._tv.send('power-off')
-            self._receiver.power(Switch.off)
+            self._receiver.send('power-off')
             self._bluray.send('power-off')
         else:
             self._tv.send('power-on')
-            self._receiver.power(Switch.on)
+            self._receiver.send('power-on')
             time.sleep(1)
             self._receiver.input(mode)
             if mode == 'Blu-Ray':
                 self._bluray.send('power-on')
             #TODO set up other devices
 
-    def sendTiVo(self, ircode):
-        self._tivo.ircode(ircode)
+    def sendReceiver(self, command):
+        self._receiver.send(command)
+
+    def sendTiVo(self, command):
+        self._tivo.send(command)
 
     def sendTiVoSecondsBack(self, t):
         self._tivo.secondsBack(t)
 
     def sendTiVoSecondsForward(self, t):
         self._tivo.secondsForward(t)
-
-    def gotoTiVoScreen(self, screen):
-        self._tivo.teleport(screen)
 
     def sendTV(self, command):
         self._tv.send(command)
