@@ -63,7 +63,7 @@
         <div class="Button" style="left:40%; width:35%; height:35%;" onclick="sendTiVo('pause')">
           <img src="/static/icons/playback-pause.png" alt="Pause" />
         </div>
-        <div class="Button" style="left:0%; top:25%;" onclick="sendTiVo('seek-back')">
+        <div class="Button" style="left:0%; top:25%;" onclick="sendTiVo('seek-backward')">
           <img src="/static/icons/playback-seek-back.png" alt="Seek Backward" />
         </div>
         <div class="Button" style="left:83.3%; top:25%;" onclick="sendTiVo('seek-forward')">
@@ -95,10 +95,10 @@
         <div class="SkipForwardLabel" style="right:0%; bottom:15%">1 min</div>
       </div>
       <div id="navigationArea" class="ButtonPanel">
-        <div class="Button" style="left:0in; top:0in;" onclick="sendTiVoGoTo('NowPlaying')" >
-          <div class="TextButton">Now Playing</div>
+        <div class="Button" style="left:0in; top:0in;" onclick="sendTiVo('tivo')" >
+          <div class="TextButton">TiVo</div>
         </div>
-        <div class="Button" style="left:83.4%; top:0%;" onclick="sendTiVoGoTo('LiveTV')" >
+        <div class="Button" style="left:83.4%; top:0%;" onclick="sendTiVo('live-tv')" >
           <div class="TextButton">Live TV</div>
         </div>
         <div class="Button" style="left:41.6%; top:12.5%;" onclick="sendTiVo('up')" >
@@ -122,12 +122,14 @@
         <div class="Button" style="left:59%; top:70%;" onclick="sendTiVo('channel-down')">
           <img src="/static/icons/channel-down.png" alt="Channel Down" />
         </div>
+        <!--
         <div class="Button" style="left:0%; top:75%;" onclick="sendTiVo('tivo')">
           <div class="TextButton">TiVo</div>
         </div>
         <div class="Button" style="left:83.4%; top:75%;" onclick="sendTiVo('return')">
           <img src="/static/icons/navigate-return.png" alt="Return" />
         </div>
+        -->
       </div>
     </div>
   </div>
