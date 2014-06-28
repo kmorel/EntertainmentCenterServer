@@ -169,8 +169,63 @@ class ReceiverIR(GenericIR):
         'Blu-Ray': 'INPUT-BD'
         }
 
+    _power = None
+    _volume = None
+    _mute = None
+    _input = None
+
     def __init__(self):
         GenericIR.__init__(self, 'PioneerReceiver')
+        self._power = Switch.off
+        self._volume = 111
+        self._mute = Switch.off
+        self._input = 'TiVo'
+
+    def getPower(self):
+        self._sendCommand('?P', True)
+        return self._power
+
+    def power(self, flag=Switch.toggle):
+        if flag == Switch.off:
+            self._sendCommand('PF')
+        elif flag == Switch.on:
+            self._sendCommand('PO')
+        elif flag == Switch.toggle:
+            if self.getPower() == Switch.on:
+                self.power(Switch.off)
+            else:
+                self.power(Switch.on)
+        else:
+            raise Exception('No such switch flag for power: %s' % flag)
+
+    def getVolume(self):
+        return self._volume
+
+    def volume(self, value):
+        """Set the volume. The volume is an integer in the range 0 to 185 where
+0 is no volume, 1 is -80 dB, 161 is 0 dB, and 185 is +12 dB"""
+        for i in xrange(self._volume, value):
+            self.send('volume-up')
+        for i in xrange(value, self._volume):
+            self.send('volume-down')
+        self._volume = value
+
+    def getMute(self):
+        return self._mute
+
+    def mute(self, flag=Switch.toggle):
+        if flag == Switch.toggle:
+            flag = ToggleSwitch(self.getMute())
+        if flag == Switch.off:
+            self.send('mute-off')
+        elif flag == Switch.on:
+            self.send('mute-on')
+        else:
+            raise Exception('No such switch flag for power: %s' % flag)
+        self._mute = flag
+
+    def getInput(self):
+        return self._input
 
     def input(self, description):
         """Change the input to the given description. The description must match
@@ -178,6 +233,7 @@ a key in the inputs dictionary field or be an integer matching
 the receiver's input code."""
         if description in self.inputs:
             self.send(self.inputs[description])
+            self._input = description
         else:
             raise Exception('No such input: %s' % description)
 

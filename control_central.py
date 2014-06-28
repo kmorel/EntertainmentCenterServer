@@ -32,14 +32,36 @@ class ControlCentral:
         self._tivo = tivo.TivoIR()
         self._tv = generic.GenericIR('SonyTV')
 
+    def getCurrentState(self):
+        if self._receiver.getPower() == Switch.off:
+            return 'Everything Off'
+        else: # Power is on
+            deviceName  = self._receiver.getInput()
+            if deviceName in self.devices:
+                return deviceName
+            else:
+                return 'Everything Off'
+
+    def getVolume(self):
+        return self._receiver.getVolume()
+
+    def getMute(self):
+        return self._receiver.getMute()
+
+    def mute(self, flag):
+        self._receiver.mute(flag)
+
+    def volume(self, level):
+        self._receiver.volume(level)
+
     def changeMode(self, mode):
         if mode == 'Everything Off':
             self._tv.send('power-off')
-            self._receiver.send('power-off')
+            self._receiver.power(Switch.off)
             self._bluray.send('power-off')
         else:
             self._tv.send('power-on')
-            self._receiver.send('power-on')
+            self._receiver.power(Switch.on)
             time.sleep(1)
             self._receiver.input(mode)
             if mode == 'Blu-Ray':

@@ -17,31 +17,31 @@ def render_page():
                                  on_mode_list=control.devices[1:], \
                                  start_mode=control.getCurrentState());
 
-# @web.route('/set-volume/<int:level>')
-# def set_volume(level):
-#     try:
-#         print 'Set volume: %s' % level
-#         sys.stdout.flush()
-#         control.volume(level)
-#     except Exception, e:
-#         print e.message
-#     except:
-#         e = sys.exc_info()[0]
-#         print e
-#     return str(level)
+@web.route('/set-volume/<int:level>')
+def set_volume(level):
+    try:
+        print 'Set volume: %s' % level
+        sys.stdout.flush()
+        control.volume(level)
+    except Exception, e:
+        print e.message
+    except:
+        e = sys.exc_info()[0]
+        print e
+    return str(level)
 
-# @web.route('/set-mute/<int:flag>')
-# def set_mute(flag):
-#     try:
-#         print 'Set mute: %s' % flag
-#         sys.stdout.flush()
-#         control.mute(flag)
-#     except Exception, e:
-#         print e.message
-#     except:
-#         e = sys.exc_info()[0]
-#         print e
-#     return str(flag)
+@web.route('/set-mute/<int:flag>')
+def set_mute(flag):
+    try:
+        print 'Set mute: %s' % flag
+        sys.stdout.flush()
+        control.mute(flag)
+    except Exception, e:
+        print e.message
+    except:
+        e = sys.exc_info()[0]
+        print e
+    return str(flag)
 
 @web.route('/set-mode/<mode>')
 def set_mode(mode):
