@@ -29,7 +29,7 @@ class ControlCentral:
     def __init__(self):
         self._bluray = generic.GenericIR('SonyBluRay')
         self._receiver = pioneer.ReceiverIR()
-        self._tivo = tivo.TivoIR()
+        self._tivo = tivo.TiVoIR()
         self._tv = generic.GenericIR('SonyTV')
 
     def getCurrentState(self):

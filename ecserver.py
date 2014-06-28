@@ -10,12 +10,21 @@ control = ControlCentral()
 
 @web.route('/')
 def render_page():
-    return flask.render_template('control.html', \
-                                 mute=int(control.getMute()), \
-                                 volume=control.getVolume(), \
-                                 mode_list=control.devices, \
-                                 on_mode_list=control.devices[1:], \
-                                 start_mode=control.getCurrentState());
+    try:
+        return flask.render_template('control.html', \
+                                     mute=int(control.getMute()), \
+                                     volume=control.getVolume(), \
+                                     mode_list=control.devices, \
+                                     on_mode_list=control.devices[1:], \
+                                     start_mode=control.getCurrentState());
+    except Exception, e:
+        print e.message
+        sys.stdout.flush()
+    except:
+        e = sys.exc_info()[0]
+        print e
+        sys.stdout.flush()
+
 
 @web.route('/set-volume/<int:level>')
 def set_volume(level):

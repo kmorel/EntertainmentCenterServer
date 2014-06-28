@@ -182,21 +182,18 @@ class ReceiverIR(GenericIR):
         self._input = 'TiVo'
 
     def getPower(self):
-        self._sendCommand('?P', True)
         return self._power
 
     def power(self, flag=Switch.toggle):
+        if flag == Switch.toggle:
+            flag = ToggleSwitch(self.getPower())
         if flag == Switch.off:
-            self._sendCommand('PF')
+            self.send('power-off')
         elif flag == Switch.on:
-            self._sendCommand('PO')
-        elif flag == Switch.toggle:
-            if self.getPower() == Switch.on:
-                self.power(Switch.off)
-            else:
-                self.power(Switch.on)
+            self.send('power-on')
         else:
             raise Exception('No such switch flag for power: %s' % flag)
+        self._power = flag
 
     def getVolume(self):
         return self._volume
@@ -206,8 +203,10 @@ class ReceiverIR(GenericIR):
 0 is no volume, 1 is -80 dB, 161 is 0 dB, and 185 is +12 dB"""
         for i in xrange(self._volume, value):
             self.send('volume-up')
+            time.sleep(0.05)
         for i in xrange(value, self._volume):
             self.send('volume-down')
+            time.sleep(0.05)
         self._volume = value
 
     def getMute(self):
