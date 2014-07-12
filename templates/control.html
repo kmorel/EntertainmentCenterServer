@@ -264,7 +264,13 @@ $(document).ready(function() {
 	// Initialize volume, slider, and mute
 	$('#volume').val({{volume}});
 	$('#volume').slider('refresh');
-	$('#volume').on("change", function(event, ui) {
+	// Original had volume change on every slider movement, but the IR
+	// update is too slow and finicky for that. Instead, change when
+	// user lets go.
+	//$('#volume').on("change", function(event, ui) {
+	//	setVolume($('#volume').val());
+	//});
+	$('#volume').on("slidestop", function(event, ui) {
 		setVolume($('#volume').val());
 	});
 	setMuteFlag({{mute}});
