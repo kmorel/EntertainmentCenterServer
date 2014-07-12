@@ -93,3 +93,10 @@ body {
 	color: #CCC;
 	background-color: #000;
 }
+.statusArea {
+	width: 100%;
+	display: inline-block;
+}
+.statusBox {
+	position: absolute;
+}

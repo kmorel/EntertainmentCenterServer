@@ -42,7 +42,8 @@ function initGUI() {
 }
 
 function pushToPage(url) {
-	new Image().src = url;
+	$('#status').load(url)
+	//new Image().src = url;
 }
 
 function setVolume(newValue) {

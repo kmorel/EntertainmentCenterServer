@@ -29,15 +29,17 @@ def render_page():
 @web.route('/set-volume/<int:level>')
 def set_volume(level):
     try:
-        print 'Set volume: %s' % level
+        print 'Set volume: %d' % level
         sys.stdout.flush()
         control.volume(level)
     except Exception, e:
         print e.message
+        return 'Set volume error: %s' % e.message
     except:
         e = sys.exc_info()[0]
         print e
-    return str(level)
+        return 'Set volume error: %s' % e
+    return 'Set volume: %d' % control.getVolume()
 
 @web.route('/set-mute/<int:flag>')
 def set_mute(flag):
@@ -47,10 +49,15 @@ def set_mute(flag):
         control.mute(flag)
     except Exception, e:
         print e.message
+        return 'Set mute error: %s' % e.message
     except:
         e = sys.exc_info()[0]
         print e
-    return str(flag)
+        return 'Set mute error: %s' % e
+    if control.getMute() == 0:
+        return 'Set mute: off'
+    else:
+        return 'Set mute: on'
 
 @web.route('/set-mode/<mode>')
 def set_mode(mode):
@@ -60,10 +67,12 @@ def set_mode(mode):
         control.changeMode(mode)
     except Exception, e:
         print e.message
+        return 'Set mode error: %s' % e
     except:
         e = sys.exc_info()[0]
         print e
-    return str(mode)
+        return 'Set mode error: %s' % e
+    return 'Set mode: %s' % control.getCurrentState()
 
 @web.route('/receiver/send/<command>')
 def receiver_send(command):
@@ -73,10 +82,12 @@ def receiver_send(command):
         control.sendReceiver(command)
     except Exception, e:
         print e.message
+        return 'Send receiver error: %s' % e.message
     except:
         e = sys.exc_info()[0]
         print e
-    return str(command)
+        return 'Send receiver error: %s' % e
+    return 'Sent: Receiver, %s' % command
 
 @web.route('/tivo/send/<command>')
 def tivo_send(command):
@@ -86,10 +97,12 @@ def tivo_send(command):
         control.sendTiVo(command)
     except Exception, e:
         print e.message
+        return 'Send TiVo error: %s' % e.message
     except:
         e = sys.exc_info()[0]
         print e
-    return str(command)
+        return 'Send TiVo error: %s' % e
+    return 'Sent: TiVo, %s' % command
 
 @web.route('/tivo/skip-back/<int:t>')
 def tivo_skip_back(t):
@@ -99,10 +112,12 @@ def tivo_skip_back(t):
         control.sendTiVoSecondsBack(t)
     except Exception, e:
         print e.message
+        return 'Send TiVo back error: %s' % e.message
     except:
         e = sys.exc_info()[0]
         print e
-    return str(t)
+        return 'Send TiVo back error: %s' % e
+    return 'Sent: Tivo, back-%d-seconds' % t
 
 @web.route('/tivo/skip-forward/<int:t>')
 def tivo_skip_forward(t):
@@ -112,10 +127,12 @@ def tivo_skip_forward(t):
         control.sendTiVoSecondsForward(t)
     except Exception, e:
         print e.message
+        return 'Send TiVo forward error: %s' % e.message
     except:
         e = sys.exc_info()[0]
         print e
-    return str(t)
+        return 'Send TiVo forward error: %s' % e
+    return 'Sent: Tivo, forward-%d-seconds' % t
 
 # @web.route('/tivo/goto/<screen>')
 # def tivo_goto(screen):
@@ -138,10 +155,12 @@ def tv_send(command):
         control.sendTV(command)
     except Exception, e:
         print e.message
+        return 'Send TV error: %s' % e.message
     except:
         e = sys.exc_info()[0]
         print e
-    return str(command)
+        return 'Send TV error: %s' % e
+    return 'Sent: TV, %s' % command
 
 @web.route('/bluray/send/<command>')
 def bluray_send(command):
@@ -151,10 +170,12 @@ def bluray_send(command):
         control.sendBluRay(command)
     except Exception, e:
         print e.message
+        return 'Send Blu-Ray error: %s' % e.message
     except:
         e = sys.exc_info()[0]
         print e
-    return str(command)
+        return 'Send Blu-Ray error: %s' % e
+    return 'Sent: Blu-Ray, %s' % command
 
 @web.route('/log/<entry>')
 def log(entry):
