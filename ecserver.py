@@ -67,7 +67,7 @@ def set_mode(mode):
         control.changeMode(mode)
     except Exception, e:
         print e.message
-        return 'Set mode error: %s' % e
+        return 'Set mode error: %s' % e.message
     except:
         e = sys.exc_info()[0]
         print e

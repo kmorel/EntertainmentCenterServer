@@ -42,7 +42,7 @@ function initGUI() {
 }
 
 function pushToPage(url) {
-	$('#status').load(url)
+	$('#status').load(encodeURIComponent(url))
 	//new Image().src = url;
 }
 
@@ -98,8 +98,8 @@ function setUpModeByName(modeName) {
 }
 
 function sendMode() {
-	pushToPage("/set-mode/" + getModeString());
 	setUpSelectedMode();
+	pushToPage("/set-mode/" + getModeString());
 }
 
 function sendModeByName(modeName) {
