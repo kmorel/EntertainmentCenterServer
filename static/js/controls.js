@@ -52,8 +52,8 @@ function initGUI() {
 	$('#mute').width(buttonSize);
 	$('#mute').height(buttonSize);
 
-	$('.systemMenuButton').width(buttonSize);
-	$('.systemMenuButton').height(buttonSize);
+	$('#systemMenuButton').width(buttonSize);
+	$('#systemMenuButton').height(buttonSize);
 
 	$('.ButtonPanel').width(6*buttonSize);
 	$('.ButtonPanel').height(4*buttonSize);
