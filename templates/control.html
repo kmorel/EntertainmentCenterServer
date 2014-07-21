@@ -248,12 +248,17 @@
   <img src="/static/icons/volume-on.png" id="mute" onclick="toggleMute()" />
 </div>
 <div class="statusArea">
-  <!--
-  <div class="Button">
-    S
+  <a href="#systemMenu" data-rel="popup">
+    <img src="/static/icons/gear.png" id="systemMenuButton" />
+  </a>
+  <div data-role="popup" id="systemMenu">
+    <ul data-role="listview" data-inset="true">
+      <li><a href="#" onclick="reloadPage()">Reload</a></li>
+      <li><a href="#" onclick="openServerManager()">Open Server Manager</a></li>
+      <li><a href="#" onclick="restartServerManager()">Restart Server Manager</a></li>
+    </ul>
   </div>
-  -->
-  <div id="status" class="statusBox" style="left:16.7%; width:83.3%">
+  <div id="status" class="statusBox" style="left:16.7%; width:83.3%;">
     <!-- Status Goes Here -->
   </div>
 </div>

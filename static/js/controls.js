@@ -1,5 +1,20 @@
 // JavaScript Document
 
+function reloadPage() {
+	$('#systemMenu').popup('close');
+	location.reload(true);
+}
+
+function openServerManager() {
+	$('#systemMenu').popup('close');
+	window.open("http://" + window.location.hostname + ":9001");
+}
+
+function restartServerManager() {
+	$('#systemMenu').popup('close');
+	window.open("http://" + window.location.hostname + ":9001/?processname=tvremote&action=restart");
+}
+
 function getButtonSize() {
 	var screenWidth = $(window).width();
 	var screenHeight = $(window).height();
@@ -37,17 +52,20 @@ function initGUI() {
 	$('#mute').width(buttonSize);
 	$('#mute').height(buttonSize);
 
+	$('.systemMenuButton').width(buttonSize);
+	$('.systemMenuButton').height(buttonSize);
+
 	$('.ButtonPanel').width(6*buttonSize);
 	$('.ButtonPanel').height(4*buttonSize);
 }
 
 function pushToPage(url) {
-	$('#status').load(encodeURIComponent(url))
+	$('#status').load(encodeURI(url))
 	//new Image().src = url;
 }
 
 function setVolume(newValue) {
-	pushToPage("/set-volume/" + newValue);
+	pushToPage('/set-volume/' + newValue);
 }
 
 muteFlag = false;
