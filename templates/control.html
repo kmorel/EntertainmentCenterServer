@@ -258,12 +258,15 @@
       <li><a href="#" onclick="restartServerManager()">Restart Server Manager</a></li>
     </ul>
   </div>
-  <div id="status" class="statusBox" style="left:16.7%; width:83.3%;">
+  <div id="status" class="statusBox" style="left:20%; width:80%;">
     <!-- Status Goes Here -->
   </div>
 </div>
 </div>
-<script type="text/javascript" src="/static/js/controls.js"></script>
+<!-- If you have trouble with a host not loading the controls.js script,
+     you can force a new load by changing the url below slightly by changing
+     the number after v= (which does nothing). -->
+<script type="text/javascript" src="/static/js/controls.js?v=1"></script>
 <script type="text/javascript">
 $(document).ready(function() {
 	// Initialize mode

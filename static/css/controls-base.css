@@ -30,6 +30,11 @@
 	vertical-align: top;
 }
 
+.statusBox {
+	display: inline-block;
+	vertical-align: top;
+}
+
 .Button {
 	text-align: center;
 	vertical-align: middle;
