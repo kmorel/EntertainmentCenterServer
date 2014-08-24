@@ -10,7 +10,7 @@ function openServerManager() {
 	window.open('http://' + window.location.hostname + ':9001', '_blank');
 }
 
-function restartServerManager() {
+function restartServer() {
 	$('#systemMenu').popup('close');
 	window.open('http://' + window.location.hostname + ':9001/?processname=tvremote&action=restart', '_blank');
 }
