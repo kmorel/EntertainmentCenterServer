@@ -7,12 +7,12 @@ function reloadPage() {
 
 function openServerManager() {
 	$('#systemMenu').popup('close');
-	window.open("http://" + window.location.hostname + ":9001");
+	window.open('http://' + window.location.hostname + ':9001', '_blank');
 }
 
 function restartServerManager() {
 	$('#systemMenu').popup('close');
-	window.open("http://" + window.location.hostname + ":9001/?processname=tvremote&action=restart");
+	window.open('http://' + window.location.hostname + ':9001/?processname=tvremote&action=restart', '_blank');
 }
 
 function getButtonSize() {
