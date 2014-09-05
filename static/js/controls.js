@@ -57,11 +57,43 @@ function initGUI() {
 
 	$('.ButtonPanel').width(6*buttonSize);
 	$('.ButtonPanel').height(4*buttonSize);
+
+	setInterval(refreshStatus, 1000);
+}
+
+function getStatus() {
+	$('#systemMenu').popup('close');
+	refreshStatus();
+}
+
+function refreshStatus() {
+	$.getJSON('/status', showStatus);
+}
+
+function showStatus(data) {
+	//$('#status').html('Refreshing Status');
+	setUpModeByName(data.mode);
+	if (!usingVolumeSlider) {
+		$('#volume').val(data.volume);
+		$('#volume').slider('refresh');
+	}
+	setMuteFlag(data.mute);
 }
 
 function pushToPage(url) {
 	$('#status').load(encodeURI(url))
 	//new Image().src = url;
+}
+
+usingVolumeSlider = false;
+
+function volumeSliderStart() {
+	usingVolumeSlider = true;
+}
+
+function volumeSliderStop(newValue) {
+	setVolume(newValue);
+	usingVolumeSlider = false;
 }
 
 function setVolume(newValue) {

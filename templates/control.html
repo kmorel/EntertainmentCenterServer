@@ -303,6 +303,7 @@
   <div data-role="popup" id="systemMenu">
     <ul data-role="listview" data-inset="true">
       <!---<li><a href="#" onclick="reloadPage()">Reload</a></li>-->
+      <li><a href="#" onclick="getStatus()">Get Status</a></li>
       <li><a href="#" onclick="openServerManager()">Open Server Manager</a></li>
       <li><a href="#" onclick="restartServer()">Restart Server</a></li>
     </ul>
@@ -331,8 +332,11 @@ $(document).ready(function() {
 	//$('#volume').on("change", function(event, ui) {
 	//	setVolume($('#volume').val());
 	//});
+	$('#volume').on("slidestart", function(event, ui) {
+		volumeSliderStart();
+	});
 	$('#volume').on("slidestop", function(event, ui) {
-		setVolume($('#volume').val());
+		volumeSliderStop($('#volume').val());
 	});
 	setMuteFlag({{mute}});
 

@@ -5,6 +5,7 @@ web = flask.Flask(__name__)
 from control_central import *
 
 import sys
+import json
 
 control = ControlCentral()
 
@@ -176,6 +177,14 @@ def bluray_send(command):
         print e
         return 'Send Blu-Ray error: %s' % e
     return 'Sent: Blu-Ray, %s' % command
+
+@web.route('/status')
+def status():
+    state = {}
+    state['mode'] = control.getCurrentState()
+    state['volume'] = control.getVolume()
+    state['mute'] = control.getMute()
+    return json.dumps(state)
 
 @web.route('/log/<entry>')
 def log(entry):
