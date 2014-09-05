@@ -7,6 +7,7 @@ from eccontrols import tivo
 
 import copy
 import time
+import threading
 
 class ControlCentral:
     """Manages the organized control of all components in my entertainment center."""
@@ -26,11 +27,16 @@ class ControlCentral:
     _tivo = None
     _tv = None
 
+    def _queryReceiver(self):
+        self._receiver.querySocket()
+        threading.Timer(300, self._queryReceiver).start()
+
     def __init__(self):
         self._bluray = generic.GenericIR('SonyBluRay')
         self._receiver = pioneer.ReceiverIR()
         self._tivo = tivo.TiVoIR()
         self._tv = generic.GenericIR('SonyTV')
+        self._queryReceiver()
 
     def getCurrentState(self):
         if self._receiver.getPower() == Switch.off:

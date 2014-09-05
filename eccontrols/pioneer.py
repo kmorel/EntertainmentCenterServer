@@ -55,7 +55,7 @@ class ReceiverSocket:
                             elif status[3] == '1':
                                 self._mute = Switch.off
                             else:
-                                print 'Unknown power:', status[3:]
+                                print 'Unknown mute:', status[3:]
                         elif status.startswith('FN'):
                             self._input = int(status[2:])
                 except socket.error:
@@ -235,6 +235,74 @@ the receiver's input code."""
             self._input = description
         else:
             raise Exception('No such input: %s' % description)
+
+    # Configuration for socket interface
+    socket_hostname = 'vsx-60.local'
+    socket_port = 23
+
+    # Would be better off in configuration
+    socket_inputs = {
+        04: 'Wii',
+        06: 'TiVo',
+        15: 'Playstation 2',
+        24: 'XBox 360',
+        25: 'Blu-Ray'
+        }
+
+    def querySocket(self):
+        """Attempts to connect to the receiver through its socket interface to
+get its applicable state."""
+        print "[", time.strftime("%Y-%m-%d %H:%M:%S"), "] Querying Pioneer Receiver status."
+        sys.stdout.flush()
+        try:
+            # Open connection
+            connection = socket.create_connection((self.socket_hostname, \
+                                                   self.socket_port))
+            connection.settimeout(2.0)
+
+            # Send an empty string to 'wake up' receiver
+            connection.send('\r\n')
+            time.sleep(0.1)
+
+            # Send query commands for power, mode, volume, and mute.
+            connection.send('?F\r\n?P\r\n?V\r\n?M\r\n')
+
+            # Read response from receiver until we get the mute response,
+            # which is the last query command sent.
+            gotmute = False
+            while not gotmute:
+                data = connection.recv(4096).split()
+                for response in data:
+                    print '  ', response
+                    if response.startswith('FN'):
+                        input_num = int(response[2:])
+                        self._input = self.socket_inputs[input_num]
+                    elif response.startswith('PWR'):
+                        if response[3] == '0':
+                            self._power = Switch.on
+                        elif response[3] == '1':
+                            self._power = Switch.off
+                        else:
+                            print 'Unknown power:', response[3:]
+                    elif response.startswith('VOL'):
+                        self._volume = int(response[3:])
+                    elif response.startswith('MUT'):
+                        gotmute = True
+                        if response[3] == '0':
+                            self._mute = Switch.on
+                        elif response[3] == '1':
+                            self._mute = Switch.off
+                        else:
+                            print 'Unknown mute:', response[3:]
+
+            connection.close()
+
+        except socket.error as e:
+            print "Socket error getting receiver state:", e.strerror
+        except:
+            print "Unkown error getting receiver state:", sys.exc_info()[0]
+
+        sys.stdout.flush()
 
 if __name__ == '__main__':
     receiver = ReceiverIR()
