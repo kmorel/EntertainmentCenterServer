@@ -256,8 +256,21 @@ get its applicable state."""
         sys.stdout.flush()
         try:
             # Open connection
-            connection = socket.create_connection((self.socket_hostname, \
-                                                   self.socket_port))
+            connection = None
+            for i in xrange(1, 6):
+                print 'Attempt', i
+                try:
+                    connection = socket.create_connection((self.socket_hostname, \
+                                                           self.socket_port))
+                    break
+                except socket.gaierror:
+                    print 'Connection attempt', i, 'failed.'
+
+            if not connection:
+                print 'Failed to connect to receiver.'
+                sys.stdout.flush()
+                return
+
             connection.settimeout(2.0)
 
             # Send an empty string to 'wake up' receiver
