@@ -12,7 +12,8 @@ Also does some parsing of the lircd.conf file to find available codes."""
     codes = {}
 
     def __init__(self, conf="/etc/lirc/lircd.conf"):
-        self._parse(conf)
+        pass
+#        self._parse(conf)
 
     def _parse(self, conf):
         """Parse the lircd.conf config file and create a dictionary.

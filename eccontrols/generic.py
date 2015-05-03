@@ -11,10 +11,10 @@ class GenericIR:
     commands = {}
 
     def __init__(self, device):
-        if not device in lirc.devices():
-            raise ECError('No such device: %s' % device)
+        # if not device in lirc.devices():
+        #     raise ECError('No such device: %s' % device)
         self.device = device
-        self.commands = lirc.commands(device)
+        # self.commands = lirc.commands(device)
 
     def send(self, command):
         """Send an IR code. Valid commands are listed in commands."""
