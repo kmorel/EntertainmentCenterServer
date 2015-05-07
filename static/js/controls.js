@@ -58,7 +58,7 @@ function initGUI() {
 	$('.ButtonPanel').width(6*buttonSize);
 	$('.ButtonPanel').height(4*buttonSize);
 
-	setInterval(refreshStatus, 30000);
+	setInterval(refreshStatus, 3000);
 }
 
 function getStatus() {
