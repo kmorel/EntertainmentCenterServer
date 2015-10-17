@@ -75,6 +75,28 @@ def set_mode(mode):
         return 'Set mode error: %s' % e
     return 'Set mode: %s' % control.getCurrentState()
 
+@web.route('/start/<mode>')
+def set_mode_and_render_page(mode):
+    try:
+        print 'Set mode: %s' % mode
+        sys.stdout.flush()
+        control.changeMode(mode)
+        return flask.render_template('control.html', \
+                                     mute=int(control.getMute()), \
+                                     volume=control.getVolume(), \
+                                     mode_list=control.devices, \
+                                     on_mode_list=control.devices[1:], \
+                                     start_mode=control.getCurrentState());
+    except Exception, e:
+        print e.message
+        sys.stdout.flush()
+        return 'Set mode error: %s' % e.message
+    except:
+        e = sys.exc_info()[0]
+        print e
+        sys.stdout.flush()
+        return 'Set mode error: %s' % e
+
 @web.route('/receiver/send/<command>')
 def receiver_send(command):
     try:
