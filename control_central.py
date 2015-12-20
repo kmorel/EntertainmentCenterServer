@@ -17,6 +17,7 @@ class ControlCentral:
         'Everything Off',
         'TiVo',
         'Blu-Ray',
+        'Chromecast',
         'XBox 360',
         'Wii',
         'Playstation 2' ]

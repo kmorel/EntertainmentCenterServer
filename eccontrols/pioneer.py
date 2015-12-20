@@ -26,6 +26,7 @@ class ReceiverSocket:
         'Wii': 04,
         'TiVo': 06,
         'Playstation 2': 15,
+        'Chromecast': 22,
         'XBox 360': 24,
         'Blu-Ray': 25
         }
@@ -165,6 +166,7 @@ class ReceiverIR(GenericIR):
         'Wii': 'INPUT-DVD',
         'TiVo': 'INPUT-SAT-CBL',
         'Playstation 2': 'INPUT-DVD-BDR',
+        'Chromecast': 'INPUT-HDMI-4',
         'XBox 360': 'INPUT-HDMI-6',
         'Blu-Ray': 'INPUT-BD'
         }
@@ -245,6 +247,7 @@ the receiver's input code."""
         04: 'Wii',
         06: 'TiVo',
         15: 'Playstation 2',
+        22: 'Chromecast',
         24: 'XBox 360',
         25: 'Blu-Ray'
         }
@@ -320,6 +323,8 @@ get its applicable state."""
 if __name__ == '__main__':
     receiver = ReceiverIR()
     receiver.input('Blu-Ray')
+    time.sleep(1)
+    receiver.input('Chromecast')
     time.sleep(1)
     receiver.input('Wii')
     time.sleep(1)
