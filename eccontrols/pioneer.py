@@ -27,6 +27,7 @@ class ReceiverSocket:
         'TiVo': 06,
         'Playstation 2': 15,
         'Chromecast': 22,
+        'PS4' : 21,
         'XBox 360': 24,
         'Blu-Ray': 25
         }
@@ -167,6 +168,7 @@ class ReceiverIR(GenericIR):
         'TiVo': 'INPUT-SAT-CBL',
         'Playstation 2': 'INPUT-DVD-BDR',
         'Chromecast': 'INPUT-HDMI-4',
+        'PS4' : 'INPUT-HDMI-3',
         'XBox 360': 'INPUT-HDMI-6',
         'Blu-Ray': 'INPUT-BD'
         }
@@ -248,6 +250,7 @@ the receiver's input code."""
         06: 'TiVo',
         15: 'Playstation 2',
         22: 'Chromecast',
+        21: 'PS4',
         24: 'XBox 360',
         25: 'Blu-Ray'
         }
@@ -333,3 +336,6 @@ if __name__ == '__main__':
     receiver.input('Playstation 2')
     time.sleep(1)
     receiver.input('XBox 360')
+    time.sleep(1)
+    receiver.input('PS4')
+

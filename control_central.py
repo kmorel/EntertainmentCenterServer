@@ -18,6 +18,7 @@ class ControlCentral:
         'TiVo',
         'Blu-Ray',
         'Chromecast',
+        'PS4',
         'XBox 360',
         'Wii',
         'Playstation 2' ]
