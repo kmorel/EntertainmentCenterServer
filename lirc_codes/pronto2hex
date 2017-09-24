@@ -2,9 +2,38 @@
 
 
 usage () {
-    echo "USAGE: `basename $0` <pronto file>"
+    echo "USAGE: `basename $0` [options] <pronto file>"
+    echo "The following options are recognized:"
+    echo "  -r|--keep-raw   Skips the step of converting raw lirc codes"
+    echo "                  into more readable codes. Although this step"
+    echo "                  often creates more reliable configuration it"
+    echo "                  sometimes fails with"
+    echo "                  'irrecord: decoding of <code> failed' errors."
+    echo "                  In this case, use this switch to skip this"
+    echo "                  conversion and use the raw codes."
     exit 1
 }
+
+pronto_file=
+keep_raw=
+for arg in "$@"; do
+    case $arg in
+        -r|--keep-raw)
+            keep_raw=1
+            shift # past argument
+            ;;
+        -h|--help)
+            usage
+            ;;
+        -*)
+            echo -e "Invalid argument: $arg"
+            usage
+            ;;
+        *)
+            pronto_file=$arg
+            ;;
+    esac
+done
 
 pronto_file=$1
 if [ ! -f "$pronto_file" ] ; then
@@ -26,7 +55,11 @@ fi
 
 hex_file=`basename $pronto_file .pronto`.lircd.conf
 echo "Creating $hex_file..."
-irrecord -a lircd.conf > $hex_file
+if [ "$keep_raw" ] ; then
+    cp lircd.conf $hex_file
+else
+    irrecord -a lircd.conf > $hex_file
+fi
 
 echo "Removing lircd.conf..."
 rm lircd.conf
