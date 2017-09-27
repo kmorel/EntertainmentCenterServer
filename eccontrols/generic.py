@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 
-from lirc import lirc
+from lirc import Lirc
 
 from eccontrols import *
+
+lirc = Lirc()
 
 class GenericIR:
     """Sends IR signals to a particular device."""

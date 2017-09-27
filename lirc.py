@@ -19,6 +19,7 @@ Also does some parsing of the lircd.conf file to find available codes."""
         """
         remote_name = None
         code_section = False
+        raw_code_section = False
 
         # Open the config file
         with open(conf, 'rb') as fp:
@@ -53,6 +54,18 @@ Also does some parsing of the lircd.conf file to find available codes."""
                     fields = l.strip().split(' ')
                     self.codes[remote_name][fields[0]] = fields[-1]
 
+                elif remote_name and l.strip()=='begin raw_codes':
+                    raw_code_section = True
+
+                elif remote_name and l.strip()=='end raw_codes':
+                    raw_code_section = False
+
+                elif remote_name and l.strip().find('name')>-1:
+                    # Got name of command
+                    code_name = l.strip().split(' ')[1]
+                    if code_name not in self.codes[remote_name]:
+                        self.codes[remote_name][code_name] = ''
+
     def devices(self):
         """Return a list of devices."""
         return self.codes.keys()
@@ -68,5 +81,3 @@ the command is sustained in milliseconds."""
         subprocess.call(['irsend', 'SEND_START', device_id, command])
         time.sleep(0.001*duration)
         subprocess.call(['irsend', 'SEND_STOP', device_id, command])
-
-lirc = Lirc()
