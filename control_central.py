@@ -3,7 +3,6 @@
 from eccontrols import *
 from eccontrols import generic
 from eccontrols import pioneer
-from eccontrols import tivo
 
 import copy
 import time
@@ -15,7 +14,7 @@ class ControlCentral:
     # If you add a new device, also add to the receiver list.
     devices = [
         'Everything Off',
-        'TiVo',
+        'DirecTV',
         'Blu-Ray',
         'Chromecast',
         'PS4',
@@ -26,7 +25,7 @@ class ControlCentral:
 
     _bluray = None
     _receiver = None
-    _tivo = None
+    _directv = None
     _tv = None
 
     def _queryReceiver(self):
@@ -36,7 +35,7 @@ class ControlCentral:
     def __init__(self):
         self._bluray = generic.GenericIR('SonyBluRay')
         self._receiver = pioneer.ReceiverIR()
-        self._tivo = tivo.TiVoIR()
+        self._directv = generic.GenericIR('DirecTV')
         self._tv = generic.GenericIR('SonyTV')
         self._queryReceiver()
 
@@ -79,14 +78,8 @@ class ControlCentral:
     def sendReceiver(self, command):
         self._receiver.send(command)
 
-    def sendTiVo(self, command):
-        self._tivo.send(command)
-
-    def sendTiVoSecondsBack(self, t):
-        self._tivo.secondsBack(t)
-
-    def sendTiVoSecondsForward(self, t):
-        self._tivo.secondsForward(t)
+    def sendDirecTV(self, command):
+        self._directv.send(command)
 
     def sendTV(self, command):
         self._tv.send(command)

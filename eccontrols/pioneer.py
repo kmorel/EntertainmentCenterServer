@@ -24,7 +24,7 @@ class ReceiverSocket:
     # Would be better off in configuration
     inputs = {
         'Wii': 04,
-        'TiVo': 06,
+        'DirecTV': 06,
         'Playstation 2': 15,
         'Chromecast': 22,
         'PS4' : 21,
@@ -165,7 +165,7 @@ class ReceiverIR(GenericIR):
     # Would be better off in configuration
     inputs = {
         'Wii': 'INPUT-DVD',
-        'TiVo': 'INPUT-SAT-CBL',
+        'DirecTV': 'INPUT-SAT-CBL',
         'Playstation 2': 'INPUT-DVD-BDR',
         'Chromecast': 'INPUT-HDMI-4',
         'PS4' : 'INPUT-HDMI-3',
@@ -183,7 +183,7 @@ class ReceiverIR(GenericIR):
         self._power = Switch.off
         self._volume = 111
         self._mute = Switch.off
-        self._input = 'TiVo'
+        self._input = 'DirecTV'
 
     def getPower(self):
         return self._power
@@ -247,7 +247,7 @@ the receiver's input code."""
     # Would be better off in configuration
     socket_inputs = {
         04: 'Wii',
-        06: 'TiVo',
+        06: 'DirecTV',
         15: 'Playstation 2',
         22: 'Chromecast',
         21: 'PS4',
@@ -331,7 +331,7 @@ if __name__ == '__main__':
     time.sleep(1)
     receiver.input('Wii')
     time.sleep(1)
-    receiver.input('TiVo')
+    receiver.input('DirecTV')
     time.sleep(1)
     receiver.input('Playstation 2')
     time.sleep(1)
