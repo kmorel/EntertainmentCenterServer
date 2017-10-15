@@ -64,14 +64,21 @@ class ControlCentral:
     def changeMode(self, mode):
         if mode == 'Everything Off':
             self._tv.send('power-off')
-            self._receiver.power(Switch.off)
+            # I used to power off the receiver. However, often we use the DirecTV
+            # remote directly, and that does not turn the receiver on/off.
+            # Instead, leave the receiver on but switch it to DirecTV mode.
+            #self._receiver.power(Switch.off)
+            self._receiver.input('DirecTV')
+            self._directv.send('power-off')
             self._bluray.send('power-off')
         else:
             self._tv.send('power-on')
             self._receiver.power(Switch.on)
             time.sleep(1)
             self._receiver.input(mode)
-            if mode == 'Blu-Ray':
+            if mode == 'DirecTV':
+                self._directv.send('power-on')
+            elif mode == 'Blu-Ray':
                 self._bluray.send('power-on')
             #TODO set up other devices
 
