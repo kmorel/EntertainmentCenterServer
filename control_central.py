@@ -37,7 +37,9 @@ class ControlCentral:
         self._receiver = pioneer.ReceiverIR()
         self._directv = generic.GenericIR('DirecTV', duration=1)
         self._tv = generic.GenericIR('SonyTV')
-        self._queryReceiver()
+        # Disabling because this is not working right now and current setup is
+        # not fully queryable.
+        #self._queryReceiver()
 
     def getCurrentState(self):
         if self._receiver.getPower() == Switch.off:
