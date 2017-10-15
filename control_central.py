@@ -75,14 +75,14 @@ class ControlCentral:
             self._bluray.send('power-off')
         else:
             self._tv.send('power-on')
-            self._receiver.power(Switch.on)
-            time.sleep(1)
-            self._receiver.input(mode)
             if mode == 'DirecTV':
                 self._directv.send('power-on')
             elif mode == 'Blu-Ray':
                 self._bluray.send('power-on')
             #TODO set up other devices
+            self._receiver.power(Switch.on)
+            time.sleep(1)
+            self._receiver.input(mode)
 
     def sendReceiver(self, command):
         self._receiver.send(command)
