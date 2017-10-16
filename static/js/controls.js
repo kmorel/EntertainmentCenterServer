@@ -169,6 +169,10 @@ function sendTiVoForward(t) {
 	pushToPage("/tivo/skip-forward/" + t);
 }
 
+function sendDirecTV(command) {
+	pushToPage("/directv/send/" + command);
+}
+
 //function sendTiVoGoTo(screen) {
 //	pushToPage("/tivo/goto/" + screen);
 //}
