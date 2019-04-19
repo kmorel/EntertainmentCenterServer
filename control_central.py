@@ -34,7 +34,7 @@ class ControlCentral:
 
     def __init__(self):
         self._bluray = generic.GenericIR('SonyBluRay')
-        self._receiver = pioneer.ReceiverIR()
+        self._receiver = pioneer.ReceiverSocket()
         self._directv = generic.GenericIR('DirecTV', duration=1)
         self._tv = generic.GenericIR('SonyTV')
         # Disabling because this is not working right now and current setup is
