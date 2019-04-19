@@ -15,6 +15,7 @@ class ControlCentral:
     devices = [
         'Everything Off',
         'DirecTV',
+        'Fire TV',
         'Blu-Ray',
         'Chromecast',
         'PS4',

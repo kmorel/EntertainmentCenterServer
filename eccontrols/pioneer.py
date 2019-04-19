@@ -26,6 +26,7 @@ class ReceiverSocket:
         'Wii': 04,
         'DirecTV': 06,
         'Playstation 2': 15,
+        'Fire TV': 19,
         'Chromecast': 22,
         'PS4' : 21,
         'XBox 360': 24,
@@ -249,6 +250,7 @@ the receiver's input code."""
         04: 'Wii',
         06: 'DirecTV',
         15: 'Playstation 2',
+        19: 'Fire TV',
         22: 'Chromecast',
         21: 'PS4',
         24: 'XBox 360',
@@ -326,6 +328,8 @@ get its applicable state."""
 if __name__ == '__main__':
     receiver = ReceiverIR()
     receiver.input('Blu-Ray')
+    time.sleep(1)
+    receiver.input('Fire TV')
     time.sleep(1)
     receiver.input('Chromecast')
     time.sleep(1)
