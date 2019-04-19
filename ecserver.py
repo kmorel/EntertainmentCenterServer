@@ -97,6 +97,23 @@ def set_mode_and_render_page(mode):
         sys.stdout.flush()
         return 'Set mode error: %s' % e
 
+@web.route('/receiver/cycle-power')
+def cycle_receiver_power():
+    try:
+        print 'Cycle receiver power'
+        sys.stdout.flush()
+        control.cycleReceiverPower()
+        return 'Cycled receiver power'
+    except Exception, e:
+        print e.message
+        sys.stdout.flush()
+        return 'Cycle receiver power error: %s' % e.message
+    except:
+        e = sys.exc_info()[0]
+        print e
+        sys.stdout.flush()
+        return 'Cycle receiver power error: %s' % e
+
 @web.route('/receiver/send/<command>')
 def receiver_send(command):
     try:

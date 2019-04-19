@@ -85,6 +85,11 @@ class ControlCentral:
             time.sleep(1)
             self._receiver.input(mode)
 
+    def cycleReceiverPower(self):
+        self._receiver.power(Switch.off)
+        time.sleep(4)
+        self._receiver.power(Switch.on)
+
     def sendReceiver(self, command):
         self._receiver.send(command)
 
