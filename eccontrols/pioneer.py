@@ -71,7 +71,8 @@ class ReceiverSocket:
         print "[", time.strftime("%Y-%m-%d %H:%M:%S"), "] Flushing Pioneer Receiver status."
         sys.stdout.flush()
         self._getStatus()
-        threading.Timer(15, self._flushStatus).start()
+        # Check again in 3 hours
+        threading.Timer(108000, self._flushStatus).start()
 
     def _sendCommand(self, command, waitForResponse=False):
         self._connectionLock.acquire()
