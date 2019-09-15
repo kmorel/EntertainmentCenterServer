@@ -90,9 +90,12 @@ class ReceiverSocket:
             self._getStatus()
             self._connection.send(command + '\r\n')
             if waitForResponse:
-                while True:
+	        # Wait for response by querying status, but only for 1 second
+	        startResponseTime = time.time()
+                while (time.time() - startResponseTime) < 1.01:
                     if self._getStatus():
                         break
+                    time.sleep(0.25)
         finally:
             self._connectionLock.release()
             print "[", time.strftime("%Y-%m-%d %H:%M:%S"), "] Lock released to send receiver command", command
@@ -100,6 +103,10 @@ class ReceiverSocket:
 
     def __init__(self):
         self._connectionLock = threading.RLock()
+	self._power = Switch.off
+	self._volume = 100
+	self._mute = Switch.off
+	self._input = 6
         while not self._connection:
             try:
                 self._connection = socket.create_connection((self.hostname,self.port))
@@ -116,8 +123,10 @@ class ReceiverSocket:
 
     def power(self, flag=Switch.toggle):
         if flag == Switch.off:
+	    self._power = Switch.off
             self._sendCommand('PF')
         elif flag == Switch.on:
+	    self._power = Switch.on
             self._sendCommand('PO')
         elif flag == Switch.toggle:
             if self.getPower() == Switch.on:
@@ -134,6 +143,7 @@ class ReceiverSocket:
     def volume(self, value):
         """Set the volume. The volume is an integer in the range 0 to 185 where
 0 is no volume, 1 is -80 dB, 161 is 0 dB, and 185 is +12 dB"""
+        self._volume = value
         self._sendCommand('%03dVL' % value)
 
     def getMute(self):
@@ -142,8 +152,10 @@ class ReceiverSocket:
 
     def mute(self, flag=Switch.toggle):
         if flag == Switch.off:
+	    self._mute = Switch.off
             self._sendCommand('MF')
         elif flag == Switch.on:
+	    self._mute = Switch.on
             self._sendCommand('MO')
         elif flag == Switch.toggle:
             if self.getMute() == Switch.on:
@@ -167,8 +179,10 @@ class ReceiverSocket:
 a key in the inputs dictionary field or be an integer matching
 the receiver's input code."""
         if isinstance(description, (int, long)):
+	    self._input = description
             self._sendCommand('%02dFN' % description)
         elif description in self.inputs:
+	    self._input = self.inputs[description]
             self._sendCommand('%02dFN' % self.inputs[description])
         else:
             raise Exception('No such input: %s' % description)
