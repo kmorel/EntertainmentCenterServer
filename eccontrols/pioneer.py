@@ -34,7 +34,11 @@ class ReceiverSocket:
         }
 
     def _getStatus(self):
+        print "[", time.strftime("%Y-%m-%d %H:%M:%S"), "] Acquiring lock for receiver status"
+        sys.stdout.flush()
         self._connectionLock.acquire()
+        print "[", time.strftime("%Y-%m-%d %H:%M:%S"), "] Lock acquired for receiver status"
+        sys.stdout.flush()
         try:
             gotData = False
             while True:
@@ -65,6 +69,8 @@ class ReceiverSocket:
                     break;
         finally:
             self._connectionLock.release()
+            print "[", time.strftime("%Y-%m-%d %H:%M:%S"), "] Lock released for receiver status"
+            sys.stdout.flush()
         return gotData
 
     def _flushStatus(self):
@@ -75,7 +81,11 @@ class ReceiverSocket:
         threading.Timer(108000, self._flushStatus).start()
 
     def _sendCommand(self, command, waitForResponse=False):
+        print "[", time.strftime("%Y-%m-%d %H:%M:%S"), "] Acquiring lock to send command", command, "to receiver" 
+        sys.stdout.flush()
         self._connectionLock.acquire()
+        print "[", time.strftime("%Y-%m-%d %H:%M:%S"), "] Lock acquired to send receiver command", command
+        sys.stdout.flush()
         try:
             self._getStatus()
             self._connection.send(command + '\r\n')
@@ -85,6 +95,8 @@ class ReceiverSocket:
                         break
         finally:
             self._connectionLock.release()
+            print "[", time.strftime("%Y-%m-%d %H:%M:%S"), "] Lock released to send receiver command", command
+            sys.stdout.flush()
 
     def __init__(self):
         self._connectionLock = threading.RLock()
