@@ -28,8 +28,8 @@ class ReceiverSocket:
         'Playstation 2': 15,
         'Fire TV': 19,
         'Chromecast': 22,
-        'PS4' : 21,
-        'XBox 360': 24,
+        'Switch-PS-XBox' : 21,
+        'HDMI 6': 24,
         'Blu-Ray': 25
         }
 
@@ -196,8 +196,8 @@ class ReceiverIR(GenericIR):
         'DirecTV': 'INPUT-SAT-CBL',
         'Playstation 2': 'INPUT-DVD-BDR',
         'Chromecast': 'INPUT-HDMI-4',
-        'PS4' : 'INPUT-HDMI-3',
-        'XBox 360': 'INPUT-HDMI-6',
+        'Switch-PS-XBox' : 'INPUT-HDMI-3',
+        'HDMI 6': 'INPUT-HDMI-6',
         'Blu-Ray': 'INPUT-BD'
         }
 
@@ -279,8 +279,8 @@ the receiver's input code."""
         15: 'Playstation 2',
         19: 'Fire TV',
         22: 'Chromecast',
-        21: 'PS4',
-        24: 'XBox 360',
+        21: 'Switch-PS-XBox',
+        24: 'HDMI 6',
         25: 'Blu-Ray'
         }
 
@@ -366,7 +366,7 @@ if __name__ == '__main__':
     time.sleep(1)
     receiver.input('Playstation 2')
     time.sleep(1)
-    receiver.input('XBox 360')
+    receiver.input('HDMI 6')
     time.sleep(1)
-    receiver.input('PS4')
+    receiver.input('Switch-PS-XBox')
 

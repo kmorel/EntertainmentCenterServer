@@ -18,8 +18,7 @@ class ControlCentral:
         'Fire TV',
         'Blu-Ray',
         'Chromecast',
-        'PS4',
-        'XBox 360',
+        'Switch-PS-XBox',
         'Wii',
         'Playstation 2' ]
             
