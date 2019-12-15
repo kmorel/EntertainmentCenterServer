@@ -195,6 +195,7 @@ class ReceiverIR(GenericIR):
         'Wii': 'INPUT-DVD',
         'DirecTV': 'INPUT-SAT-CBL',
         'Playstation 2': 'INPUT-DVD-BDR',
+        'Fire TV': 'INPUT-HDMI-1',
         'Chromecast': 'INPUT-HDMI-4',
         'Switch-PS-XBox' : 'INPUT-HDMI-3',
         'HDMI 6': 'INPUT-HDMI-6',
