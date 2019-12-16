@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+from __future__ import print_function
+
 from eccontrols import *
 from eccontrols import generic
 from eccontrols import pioneer
@@ -104,6 +106,6 @@ class ControlCentral:
 
 if __name__ == '__main__':
     control = ControlCentral()
-    print control.devices.index(control.getCurrentState())
-    print control.getVolume()
-    print control.getMute()
+    print(control.devices.index(control.getCurrentState()))
+    print(control.getVolume())
+    print(control.getMute())

@@ -22,7 +22,7 @@ Also does some parsing of the lircd.conf file to find available codes."""
         raw_code_section = False
 
         # Open the config file
-        with open(conf, 'rb') as fp:
+        with open(conf, 'rt') as fp:
             for line in fp:
                 # Convert tabs to spaces
                 l = line.replace('\t',' ')
