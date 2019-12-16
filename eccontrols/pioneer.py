@@ -236,10 +236,10 @@ class ReceiverIR(GenericIR):
     def volume(self, value):
         """Set the volume. The volume is an integer in the range 0 to 185 where
 0 is no volume, 1 is -80 dB, 161 is 0 dB, and 185 is +12 dB"""
-        for i in xrange(self._volume, value):
+        for i in range(self._volume, value):
             self.send('volume-up')
             time.sleep(0.05)
-        for i in xrange(value, self._volume):
+        for i in range(value, self._volume):
             self.send('volume-down')
             time.sleep(0.05)
         self._volume = value
@@ -295,7 +295,7 @@ get its applicable state."""
         try:
             # Open connection
             connection = None
-            for i in xrange(1, 6):
+            for i in range(1, 6):
                 print('Attempt', i)
                 try:
                     connection = socket.create_connection((self.socket_hostname, \
