@@ -148,6 +148,12 @@ class ReceiverSocket:
         self._volume = value
         self._sendCommand('%03dVL' % value)
 
+    def volume_down(self, value):
+        self.volume(self._volume - value)
+
+    def volume_up(self, value):
+        self.volume(self._volume + value)
+
     def getMute(self):
         self._sendCommand('?M', True)
         return self._mute
@@ -243,6 +249,16 @@ class ReceiverIR(GenericIR):
             self.send('volume-down')
             time.sleep(0.05)
         self._volume = value
+
+    def volume_down(self, value):
+        for i in range(value):
+            self.send('volume-down')
+        time.sleep(0.025)
+
+    def volume_up(self, value):
+        for i in range(value):
+            self.send('volume-up')
+        time.sleep(0.025)
 
     def getMute(self):
         return self._mute

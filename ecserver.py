@@ -43,6 +43,36 @@ def set_volume(level):
         return 'Set volume error: %s' % e
     return 'Set volume: %d' % control.getVolume()
 
+@web.route('/volume-down/<int:level>')
+def volume_down(level):
+    try:
+        print('Volume down: %0.1f dB' % (0.5*level))
+        sys.stdout.flush()
+        control.volume_down(level)
+    except Exception as e:
+        print(e.message)
+        return 'Volume down: %s' % e.message
+    except:
+        e = sys.exc_info()[0]
+        print(e)
+        return 'Volume down error: %s' % e
+    return 'Volume down: %0.1f' % (0.5*level)
+
+@web.route('/volume-up/<int:level>')
+def volume_up(level):
+    try:
+        print('Volume up: %0.1f dB' % (0.5*level))
+        sys.stdout.flush()
+        control.volume_up(level)
+    except Exception as e:
+        print(e.message)
+        return 'Volume up: %s' % e.message
+    except:
+        e = sys.exc_info()[0]
+        print(e)
+        return 'Volume up error: %s' % e
+    return 'Volume up: %0.1f' % (0.5*level)
+
 @web.route('/set-mute/<int:flag>')
 def set_mute(flag):
     try:

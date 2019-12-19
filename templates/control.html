@@ -364,7 +364,7 @@
 <div id="volumeArea">
   <div class="VolumeSelect">
     <form class="full-width-slider">
-      <input id="volume" type="range" class="VolumeSlider" min="81" max="141" data-highlight="true" />
+      <input id="volume" type="range" class="VolumeSlider" min="-20" max="20" data-highlight="true" />
     </form>
   </div>
   <img src="/static/icons/volume-on.png" id="mute" onclick="toggleMute()" />
@@ -397,7 +397,8 @@ $(document).ready(function() {
 	// Make text box next to slider read only.
 	$(".ui-slider-input").prop("readonly",true);
 	// Initialize volume, slider, and mute
-	$('#volume').val({{volume}});
+	//$('#volume').val({{volume}});
+	$('#volume').val(0);
 	$('#volume').slider('refresh');
 	// Original had volume change on every slider movement, but the IR
 	// update is too slow and finicky for that. Instead, change when

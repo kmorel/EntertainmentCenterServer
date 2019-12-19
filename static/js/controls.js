@@ -74,7 +74,8 @@ function showStatus(data) {
 	//$('#status').html('Refreshing Status');
 	setUpModeByName(data.mode);
 	if (!usingVolumeSlider) {
-		$('#volume').val(data.volume);
+		//$('#volume').val(data.volume);
+		$('#volume').val(0);
 		$('#volume').slider('refresh');
 	}
 	setMuteFlag(data.mute);
@@ -94,10 +95,17 @@ function volumeSliderStart() {
 function volumeSliderStop(newValue) {
 	setVolume(newValue);
 	usingVolumeSlider = false;
+	$('#volume').val(0);
+	$('#volume').slider('refresh');
 }
 
 function setVolume(newValue) {
-	pushToPage('/set-volume/' + newValue);
+	//pushToPage('/set-volume/' + newValue);
+	if (newValue < 0) {
+		pushToPage('/volume-down/' + -newValue)
+	} else if (newValue > 0) {
+		pushToPage('/volume-up/' + newValue)
+	}
 }
 
 muteFlag = false;

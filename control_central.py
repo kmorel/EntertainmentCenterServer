@@ -66,6 +66,12 @@ class ControlCentral:
     def volume(self, level):
         self._receiver.volume(level)
 
+    def volume_down(self, level):
+        self._receiver.volume_down(level)
+
+    def volume_up(self, level):
+        self._receiver.volume_up(level)
+
     def changeMode(self, mode):
         if mode == 'Everything Off':
             self._tv.send('power-off')
