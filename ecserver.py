@@ -15,10 +15,9 @@ def render_page():
     try:
         return flask.render_template('control.html', \
                                      mute=int(control.getMute()), \
-                                     volume=control.getVolume(), \
-                                     mode_list=control.devices, \
-                                     on_mode_list=control.devices[1:], \
-                                     start_mode=control.getCurrentState());
+                                     mode_list=control.getModes(), \
+                                     on_mode_list=control.getModes()[1:], \
+                                     start_mode=control.getCurrentMode());
     except Exception as e:
         print(e.message)
         sys.stdout.flush()
@@ -26,22 +25,6 @@ def render_page():
         e = sys.exc_info()[0]
         print(e)
         sys.stdout.flush()
-
-
-@web.route('/set-volume/<int:level>')
-def set_volume(level):
-    try:
-        print('Set volume: %d' % level)
-        sys.stdout.flush()
-        control.volume(level)
-    except Exception as e:
-        print(e.message)
-        return 'Set volume error: %s' % e.message
-    except:
-        e = sys.exc_info()[0]
-        print(e)
-        return 'Set volume error: %s' % e
-    return 'Set volume: %d' % control.getVolume()
 
 @web.route('/volume-down/<int:level>')
 def volume_down(level):
@@ -145,71 +128,25 @@ def cycle_receiver_power():
         sys.stdout.flush()
         return 'Cycle receiver power error: %s' % e
 
-@web.route('/receiver/send/<command>')
-def receiver_send(command):
+@web.route('/send/<device>/<command>')
+def send(device, command):
     try:
-        print('Receiver IR Code: %s' % command)
+        print('Send %s, %s' % (device, command))
         sys.stdout.flush()
-        control.sendReceiver(command)
+        control.send(device, command)
     except Exception as e:
         print(e.message)
-        return 'Send receiver error: %s' % e.message
+        return 'Send %s error: %s' % (device, e.message)
     except:
         e = sys.exc_info()[0]
         print(e)
-        return 'Send receiver error: %s' % e
-    return 'Sent: Receiver, %s' % command
-
-@web.route('/directv/send/<command>')
-def directv_send(command):
-    try:
-        print('DirecTV IR Code: %s' % command)
-        sys.stdout.flush()
-        control.sendDirecTV(command)
-    except Exception as e:
-        print(e.message)
-        return 'Send DirecTV error: %s' % e.message
-    except:
-        e = sys.exc_info()[0]
-        print(e)
-        return 'Send DirecTV error: %s' % e
-    return 'Sent: DirecTV, %s' % command
-
-@web.route('/tv/send/<command>')
-def tv_send(command):
-    try:
-        print('TV Command:', command)
-        sys.stdout.flush()
-        control.sendTV(command)
-    except Exception as e:
-        print(e.message)
-        return 'Send TV error: %s' % e.message
-    except:
-        e = sys.exc_info()[0]
-        print(e)
-        return 'Send TV error: %s' % e
-    return 'Sent: TV, %s' % command
-
-@web.route('/bluray/send/<command>')
-def bluray_send(command):
-    try:
-        print('Blu-Ray Command:', command)
-        sys.stdout.flush()
-        control.sendBluRay(command)
-    except Exception as e:
-        print(e.message)
-        return 'Send Blu-Ray error: %s' % e.message
-    except:
-        e = sys.exc_info()[0]
-        print(e)
-        return 'Send Blu-Ray error: %s' % e
-    return 'Sent: Blu-Ray, %s' % command
+        return 'Send %s error: %s' % (device, e)
+    return 'Sent: %s, %s' % (device, command)
 
 @web.route('/status')
 def status():
     state = {}
     state['mode'] = control.getCurrentState()
-    state['volume'] = control.getVolume()
     state['mute'] = control.getMute()
     return json.dumps(state)
 

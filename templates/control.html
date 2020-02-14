@@ -145,7 +145,7 @@
       {% endfor %}
     </ul>
   </div>
-  <div class="ControlArea" id="DirecTV">
+  <div class="ControlArea" id="TV">
     <div data-role="tabs">
       <div data-role="navbar">
         <ul>
@@ -154,16 +154,16 @@
         </ul>
       </div>
       <div id="playbackArea" class="ButtonPanel">
-        <div class="Button" style="left:22%;" onclick="sendDirecTV('play')">
+        <div class="Button" style="left:22%;" onclick="send('DVR', 'play')">
           <img src="/static/icons/playback-play.png" alt="Play" />
         </div>
-        <div class="Button" style="left:40%; width:35%; height:35%;" onclick="sendDirecTV('pause')">
+        <div class="Button" style="left:40%; width:35%; height:35%;" onclick="send('DVR', 'pause')">
           <img src="/static/icons/playback-pause.png" alt="Pause" />
         </div>
-        <div class="Button" style="left:0%; top:25%;" onclick="sendDirecTV('reverse')">
+        <div class="Button" style="left:0%; top:25%;" onclick="send('DVR', 'reverse')">
           <img src="/static/icons/playback-seek-back.png" alt="Seek Backward" />
         </div>
-        <div class="Button" style="left:83.3%; top:25%;" onclick="sendDirecTV('forward')">
+        <div class="Button" style="left:83.3%; top:25%;" onclick="send('DVR', 'forward')">
           <img src="/static/icons/playback-seek-forward.png" alt="Seek Forward" />
         </div>
 <!--
@@ -176,20 +176,24 @@
         </div>
         <div class="SkipBackLabel" style="left:16.6%; bottom:10%">30 sec</div>
 -->
+<!--
         <div class="Button" style="left:33.3%; bottom:10%;" onclick="sendDirecTV('replay')">
           <img src="/static/icons/playback-skip-back-time.png" alt="Back 8 Seconds" />
         </div>
         <div class="SkipBackLabel" style="left:33.3%; bottom:10%">8 sec</div>
+-->
 <!--
         <div class="Button" style="right:33.3%; bottom:15%;" onclick="sendTiVoForward(8)">
           <img src="/static/icons/playback-skip-forward-time.png" alt="Forward 8 Seconds" />
         </div>
         <div class="SkipForwardLabel" style="right:33.3%; bottom:15%">8 sec</div>
 -->
+<!--
         <div class="Button" style="right:16.6%; bottom:15%;" onclick="sendDirecTV('skip')">
           <img src="/static/icons/playback-skip-forward-time.png" alt="Forward 30 Seconds" />
         </div>
         <div class="SkipForwardLabel" style="right:16.6%; bottom:15%">30 sec</div>
+-->
 <!--
         <div class="Button" style="right:0%; bottom:15%;" onclick="sendTiVoForward(60)">
           <img src="/static/icons/playback-skip-forward-time.png" alt="Forward 1 Minute" />
@@ -198,31 +202,31 @@
 -->
       </div>
       <div id="navigationArea" class="ButtonPanel">
-        <div class="Button" style="left:0in; top:0in;" onclick="sendDirecTV('guide')" >
+        <div class="Button" style="left:0in; top:0in;" onclick="send('DVR', 'guide')" >
           <div class="TextButton">Guide</div>
         </div>
-        <div class="Button" style="left:83.4%; top:0%;" onclick="sendDirecTV('menu-dvr')" >
+        <div class="Button" style="left:83.4%; top:0%;" onclick="send('DVR', 'xfinity')" >
           <div class="TextButton">List</div>
         </div>
-        <div class="Button" style="left:41.6%; top:12.5%;" onclick="sendDirecTV('cursor-up')" >
+        <div class="Button" style="left:41.6%; top:12.5%;" onclick="send('DVR', 'up')" >
           <img src="/static/icons/navigate-up.png" alt="Up" />
         </div>
-        <div class="Button" style="left:25%; top:37.5%;" onclick="sendDirecTV('cursor-left')">
+        <div class="Button" style="left:25%; top:37.5%;" onclick="send('DVR', 'left')">
           <img src="/static/icons/navigate-left.png" alt="Left" />
         </div>
-        <div class="Button" style="left:41.6%; top:37.5%;" onclick="sendDirecTV('cursor-enter')">
+        <div class="Button" style="left:41.6%; top:37.5%;" onclick="send('DVR', 'ok')">
           <img src="/static/icons/navigate-select.png" alt="Select" />
         </div>
-        <div class="Button" style="left:58.3%; top:37.5%;" onclick="sendDirecTV('cursor-right')">
+        <div class="Button" style="left:58.3%; top:37.5%;" onclick="send('DVR', 'right')">
           <img src="/static/icons/navigate-right.png" alt="Right" />
         </div>
-        <div class="Button" style="left:41.6%; top:62.5%;" onclick="sendDirecTV('cursor-down')">
+        <div class="Button" style="left:41.6%; top:62.5%;" onclick="send('DVR', 'down')">
           <img src="/static/icons/navigate-down.png" alt="Down" />
         </div>
-        <div class="Button" style="left:59%; top:5%;" onclick="sendDirecTV('channel-up')">
+        <div class="Button" style="left:59%; top:5%;" onclick="send('DVR', 'page-up')">
           <img src="/static/icons/channel-up.png" alt="Channel Up" />
         </div>
-        <div class="Button" style="left:59%; top:70%;" onclick="sendDirecTV('channel-down')">
+        <div class="Button" style="left:59%; top:70%;" onclick="send('DVR', 'page-down')">
           <img src="/static/icons/channel-down.png" alt="Channel Down" />
         </div>
         <!--
@@ -245,22 +249,22 @@
         </ul>
       </div>
       <div id="playbackArea" class="ButtonPanel">
-        <div class="Button" style="left:22%;" onclick="sendBluRay('play')">
+        <div class="Button" style="left:22%;" onclick="send('Blu-Ray', 'play')">
           <img src="/static/icons/playback-play.png" alt="Play" />
         </div>
-        <div class="Button" style="left:40%; width:35%; height:35%;" onclick="sendBluRay('pause')">
+        <div class="Button" style="left:40%; width:35%; height:35%;" onclick="send('Blu-Ray', 'pause')">
           <img src="/static/icons/playback-pause.png" alt="Pause" />
         </div>
-        <div class="Button" style="left:0%; top:25%;" onclick="sendBluRay('seek-backward')">
+        <div class="Button" style="left:0%; top:25%;" onclick="send('Blu-Ray', 'seek-backward')">
           <img src="/static/icons/playback-seek-back.png" alt="Seek Backward" />
         </div>
-        <div class="Button" style="left:83.3%; top:25%;" onclick="sendBluRay('seek-forward')">
+        <div class="Button" style="left:83.3%; top:25%;" onclick="send('Blu-Ray', 'seek-forward')">
           <img src="/static/icons/playback-seek-forward.png" alt="Seek Forward" />
         </div>
-        <div class="Button" style="left:0%; top:60%;" onclick="sendBluRay('previous-track')">
+        <div class="Button" style="left:0%; top:60%;" onclick="send('Blu-Ray', 'previous-track')">
           <img src="/static/icons/playback-skip-back.png" alt="Previous Track" />
         </div>
-        <div class="Button" style="left:83.3%; top:60%;" onclick="sendBluRay('next-track')">
+        <div class="Button" style="left:83.3%; top:60%;" onclick="send('Blu-Ray', 'next-track')">
           <img src="/static/icons/playback-skip-forward.png" alt="Next Track" />
         </div>
         <!--
@@ -291,39 +295,39 @@
         -->
       </div>
       <div id="navigationArea" class="ButtonPanel">
-        <div class="Button" style="left:0in; top:0in;" onclick="sendBluRay('top-menu')" >
+        <div class="Button" style="left:0in; top:0in;" onclick="send('Blu-Ray', 'top-menu')" >
           <div class="TextButton">Top Menu</div>
         </div>
-        <div class="Button" style="left:83.4%; top:0%;" onclick="sendBluRay('pop-up-menu')" >
+        <div class="Button" style="left:83.4%; top:0%;" onclick="send('Blu-Ray', 'pop-up-menu')" >
           <div class="TextButton">Pop Up / Menu</div>
         </div>
-        <div class="Button" style="left:41.6%; top:12.5%;" onclick="sendBluRay('up')" >
+        <div class="Button" style="left:41.6%; top:12.5%;" onclick="send('Blu-Ray', 'up')" >
           <img src="/static/icons/navigate-up.png" alt="Up" />
         </div>
-        <div class="Button" style="left:25%; top:37.5%;" onclick="sendBluRay('left')">
+        <div class="Button" style="left:25%; top:37.5%;" onclick="send('Blu-Ray', 'left')">
           <img src="/static/icons/navigate-left.png" alt="Left" />
         </div>
-        <div class="Button" style="left:41.6%; top:37.5%;" onclick="sendBluRay('select')">
+        <div class="Button" style="left:41.6%; top:37.5%;" onclick="send('Blu-Ray', 'select')">
           <img src="/static/icons/navigate-select.png" alt="Select" />
         </div>
-        <div class="Button" style="left:58.3%; top:37.5%;" onclick="sendBluRay('right')">
+        <div class="Button" style="left:58.3%; top:37.5%;" onclick="send('Blu-Ray', 'right')">
           <img src="/static/icons/navigate-right.png" alt="Right" />
         </div>
-        <div class="Button" style="left:41.6%; top:62.5%;" onclick="sendBluRay('down')">
+        <div class="Button" style="left:41.6%; top:62.5%;" onclick="send('Blu-Ray', 'down')">
           <img src="/static/icons/navigate-down.png" alt="Down" />
         </div>
         <!--
-        <div class="Button" style="left:59%; top:5%;" onclick="sendBluRay('channel-up')">
+        <div class="Button" style="left:59%; top:5%;" onclick="send('Blu-Ray', 'channel-up')">
           <img src="/static/icons/channel-up.png" alt="Channel Up" />
         </div>
-        <div class="Button" style="left:59%; top:70%;" onclick="sendBluRay('channel-down')">
+        <div class="Button" style="left:59%; top:70%;" onclick="send('Blu-Ray', 'channel-down')">
           <img src="/static/icons/channel-down.png" alt="Channel Down" />
         </div>
         -->
-        <div class="Button" style="left:0%; top:75%;" onclick="sendBluRay('system-menu')">
+        <div class="Button" style="left:0%; top:75%;" onclick="send('Blu-Ray', 'system-menu')">
           <div class="TextButton">System Menu</div>
         </div>
-        <div class="Button" style="left:83.4%; top:75%;" onclick="sendBluRay('return')">
+        <div class="Button" style="left:83.4%; top:75%;" onclick="send('Blu-Ray', 'return')">
           <img src="/static/icons/navigate-return.png" alt="Return" />
         </div>
       </div>

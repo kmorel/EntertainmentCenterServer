@@ -6,6 +6,7 @@ from eccontrols import *
 from eccontrols import generic
 from eccontrols import pioneer
 
+import collections
 import copy
 import time
 import threading
@@ -13,105 +14,116 @@ import threading
 class ControlCentral:
     """Manages the organized control of all components in my entertainment center."""
 
-    # If you add a new device, also add to the receiver list.
-    devices = [
-        'Everything Off',
-        'DirecTV',
-        'Fire TV',
-        'Blu-Ray',
-        'Chromecast',
-        'Switch-PS-XBox',
-        'Wii',
-        'Playstation 2' ]
-            
+    _devices = {
+        'Receiver': generic.GenericIR('YamahaRXV683'),
+        'DVR': generic.GenericIR('X1'),
+        'Blu-Ray': generic.GenericIR('SonyBluRay'),
+        'TV': generic.GenericIR('SonyTV'),
+        'pause': time.sleep,
+       }
 
-    _bluray = None
-    _receiver = None
-    _directv = None
-    _tv = None
+    _modes = collections.OrderedDict([
+            ('Everything Off', [
+		    ('Receiver', 'INPUT-HDMI-2'),
+                    ('Receiver', 'POWER-OFF'),
+                    ('TV', 'POWER-OFF'),
+                    ('Blu-Ray', 'POWER-OFF'),
+                    ]),
+            ('TV', [
+                    ('Receiver', 'POWER-ON'),
+                    ('TV', 'POWER-ON'),
+                    ('pause', 1),
+                    ('Receiver', 'INPUT-HDMI-2'),
+                    ]),
+            ('Blu-Ray', [
+                    ('Receiver', 'POWER-ON'),
+                    ('TV', 'POWER-ON'),
+                    ('Blu-Ray', 'POWER-ON'),
+                    ('pause', 1),
+                    ('Receiver', 'INPUT-HDMI-1'),
+                    ]),
+            ('Fire TV', [
+                    ('Receiver', 'POWER-ON'),
+                    ('TV', 'POWER-ON'),
+                    ('pause', 1),
+                    ('Receiver', 'INPUT-HDMI-5'),
+                    ]),
+            ('Chromecast', [
+                    ('Receiver', 'POWER-ON'),
+                    ('TV', 'POWER-ON'),
+                    ('pause', 1),
+                    ('Receiver', 'INPUT-HDMI-4'),
+                    ]),
+            ('Switch-PS-XBox', [
+                    ('Receiver', 'POWER-ON'),
+                    ('TV', 'POWER-ON'),
+                    ('pause', 1),
+                    ('Receiver', 'INPUT-HDMI-3'),
+                    ]),
+            ('Playstation 2', [
+                    ('Receiver', 'POWER-ON'),
+                    ('TV', 'POWER-ON'),
+                    ('pause', 1),
+                    ('Receiver', 'INPUT-AV-2'),
+                    ]),
+            ])
 
-    def _queryReceiver(self):
-        self._receiver.querySocket()
-        threading.Timer(300, self._queryReceiver).start()
+    _currentMode = None
+    _mute = None
 
     def __init__(self):
-        self._bluray = generic.GenericIR('SonyBluRay')
-        #self._receiver = pioneer.ReceiverSocket()
-        self._receiver = pioneer.ReceiverIR()
-        self._directv = generic.GenericIR('DirecTV', duration=1)
-        self._tv = generic.GenericIR('SonyTV')
-        # Disabling because this is not working right now and current setup is
-        # not fully queryable.
-        #self._queryReceiver()
+        self._currentMode = 'Everything Off'
+        self._mute = Switch.off
 
-    def getCurrentState(self):
-        if self._receiver.getPower() == Switch.off:
-            return 'Everything Off'
-        else: # Power is on
-            deviceName  = self._receiver.getInput()
-            if deviceName in self.devices:
-                return deviceName
-            else:
-                return 'Everything Off'
+    def send(self, device, code):
+        if not device in self._devices:
+            raise ECError('No such device ' + device)
+        self._devices[device](code)
 
-    def getVolume(self):
-        return self._receiver.getVolume()
+    def sendSequence(self, sequence):
+        for device, code in sequence:
+            self.send(device, code)
+
+    def getModes(self):
+        return self._modes.keys()
+
+    def getCurrentMode(self):
+        return self._currentMode
 
     def getMute(self):
-        return self._receiver.getMute()
+        return self._mute
 
     def mute(self, flag):
-        self._receiver.mute(flag)
+        if flag == Switch.toggle:
+            flag = ToggleSwitch(self.getMute())
 
-    def volume(self, level):
-        self._receiver.volume(level)
+        if flag == Switch.off:
+            self.send('Receiver', 'mute-off')
+        elif flag == Switch.on:
+            self.send('Receiver', 'mute-on')
+        else:
+            raise ECError('No such switch flag for power: %s' % flag)
+        self._mute = flag
 
-    def volume_down(self, level):
-        self._receiver.volume_down(level)
+    def volume_down(self, value):
+        for i in range(value):
+            self.send('Receiver', 'volume-down')
 
-    def volume_up(self, level):
-        self._receiver.volume_up(level)
+    def volume_up(self, value):
+        for i in range(value):
+            self.send('Receiver', 'volume-up')
 
     def changeMode(self, mode):
-        if mode == 'Everything Off':
-            self._tv.send('power-off')
-            # I used to power off the receiver. However, often we use the DirecTV
-            # remote directly, and that does not turn the receiver on/off.
-            # Instead, leave the receiver on but switch it to DirecTV mode.
-            #self._receiver.power(Switch.off)
-            self._receiver.input('DirecTV')
-            self._directv.send('power-off')
-            self._bluray.send('power-off')
-        else:
-            self._tv.send('power-on')
-            if mode == 'DirecTV':
-                self._directv.send('power-on')
-            elif mode == 'Blu-Ray':
-                self._bluray.send('power-on')
-            #TODO set up other devices
-            self._receiver.power(Switch.on)
-            time.sleep(1)
-            self._receiver.input(mode)
+        if not mode in self._modes:
+            raise ECError('No such mode: %s' % flag)
+        self.sendSequence(self._modes[mode])
+        self._currentMode = mode
 
     def cycleReceiverPower(self):
-        self._receiver.power(Switch.off)
-        time.sleep(4)
-        self._receiver.power(Switch.on)
-
-    def sendReceiver(self, command):
-        self._receiver.send(command)
-
-    def sendDirecTV(self, command):
-        self._directv.send(command)
-
-    def sendTV(self, command):
-        self._tv.send(command)
-
-    def sendBluRay(self, command):
-        self._bluray.send(command)
+        self.send('Receiver', 'power-off')
+        self.send('pause', 5)
+        self.send('Receiver', 'power-on')
 
 if __name__ == '__main__':
     control = ControlCentral()
-    print(control.devices.index(control.getCurrentState()))
-    print(control.getVolume())
-    print(control.getMute())
+    control.sendSequence([('Receiver', 'volume-down'), ('Receiver', 'volume-down')])

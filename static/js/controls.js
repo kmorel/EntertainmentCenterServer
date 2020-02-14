@@ -165,25 +165,9 @@ function sendModeByName(modeName) {
 	sendMode();
 }
 
-function sendTiVo(command) {
-	pushToPage("/tivo/send/" + command);
+function send(device, command) {
+	pushToPage("/send/" + device + "/" + command);
 }
-
-function sendTiVoBack(t) {
-	pushToPage("/tivo/skip-back/" + t);
-}
-
-function sendTiVoForward(t) {
-	pushToPage("/tivo/skip-forward/" + t);
-}
-
-function sendDirecTV(command) {
-	pushToPage("/directv/send/" + command);
-}
-
-//function sendTiVoGoTo(screen) {
-//	pushToPage("/tivo/goto/" + screen);
-//}
 
 function sendBluRay(command) {
 	pushToPage("/bluray/send/" + command);
